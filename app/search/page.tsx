@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { SearchFilters } from '@/components/search/SearchFilters';
 import { SitterListCard } from '@/components/search/SitterListCard';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface Sitter {
     id: string;
@@ -17,6 +18,7 @@ interface Sitter {
 }
 
 export default function SearchPage() {
+    const { t } = useLanguage();
     const [sitters, setSitters] = useState<Sitter[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -37,7 +39,7 @@ export default function SearchPage() {
 
             setSitters(data.sitters || []);
         } catch (err: any) {
-            setError(err.message || 'Error loading sitters');
+            setError(err.message || t('search.error'));
             console.error('Fetch sitters error:', err);
         } finally {
             setLoading(false);
@@ -50,10 +52,10 @@ export default function SearchPage() {
                 {/* Page Header */}
                 <div style={{ marginBottom: '2rem' }}>
                     <h1 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.5rem' }}>
-                        Encuentra al cuidador perfecto
+                        {t('search.title')}
                     </h1>
                     <p style={{ color: 'var(--text-secondary)' }}>
-                        Más de 500 cuidadores verificados en tu área listos para ayudarte.
+                        {t('search.subtitle')}
                     </p>
                 </div>
 
@@ -69,7 +71,7 @@ export default function SearchPage() {
                         {/* Active Filters / Count */}
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>
-                                {loading ? 'Cargando...' : `${sitters.length} resultados encontrados`}
+                                {loading ? t('common.loading') : `${sitters.length} ${t('search.results')}`}
                             </span>
                         </div>
 
@@ -89,7 +91,7 @@ export default function SearchPage() {
                         {/* Loading State */}
                         {loading && !error && (
                             <div style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
-                                Cargando cuidadores...
+                                {t('search.loading')}
                             </div>
                         )}
 
@@ -104,10 +106,10 @@ export default function SearchPage() {
                             }}>
                                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🐾</div>
                                 <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-                                    No hay cuidadores disponibles
+                                    {t('search.emptyTitle')}
                                 </h3>
                                 <p style={{ color: 'var(--text-secondary)' }}>
-                                    Intenta ajustar tus filtros o vuelve más tarde.
+                                    {t('search.emptyDesc')}
                                 </p>
                             </div>
                         )}
@@ -137,7 +139,7 @@ export default function SearchPage() {
                                     color: 'var(--text-secondary)',
                                     cursor: 'pointer'
                                 }}>
-                                    Cargar más resultados
+                                    {t('search.loadMore')}
                                 </button>
                             </div>
                         )}

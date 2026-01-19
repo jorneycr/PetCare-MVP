@@ -57,6 +57,16 @@ export const dictionary = {
             success: '¡Perfil actualizado con éxito!',
             error: 'Error al actualizar el perfil'
         },
+        search: {
+            title: 'Encuentra al cuidador perfecto',
+            subtitle: 'Más de 500 cuidadores verificados en tu área listos para ayudarte.',
+            results: 'resultados encontrados',
+            loading: 'Cargando cuidadores...',
+            error: 'Error al cargar cuidadores',
+            emptyTitle: 'No hay cuidadores disponibles',
+            emptyDesc: 'Intenta ajustar tus filtros o vuelve más tarde.',
+            loadMore: 'Cargar más resultados'
+        },
         common: {
             loading: 'Cargando...',
             error: 'Ocurrió un error',
@@ -122,6 +132,16 @@ export const dictionary = {
             saving: 'Saving...',
             success: 'Profile updated successfully!',
             error: 'Error updating profile'
+        },
+        search: {
+            title: 'Find the perfect sitter',
+            subtitle: 'Over 500 verified sitters in your area ready to help you.',
+            results: 'results found',
+            loading: 'Loading sitters...',
+            error: 'Error loading sitters',
+            emptyTitle: 'No sitters available',
+            emptyDesc: 'Try adjusting your filters or check back later.',
+            loadMore: 'Load more results'
         },
         common: {
             loading: 'Loading...',
