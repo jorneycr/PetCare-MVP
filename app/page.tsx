@@ -1,8 +1,13 @@
+'use client';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function Home() {
+  const { t } = useLanguage();
+
   return (
     <main>
       {/* Hero Section */}
@@ -38,7 +43,7 @@ export default function Home() {
               fontWeight: 600,
               color: 'var(--primary)'
             }}>
-              ✨ La app #1 de cuidado de mascotas en Costa Rica
+              ✨ {t('home.heroTitle').split(',')[0]}
             </span>
             <h1 style={{
               fontSize: 'clamp(2.5rem, 5vw, 4rem)',
@@ -47,8 +52,8 @@ export default function Home() {
               lineHeight: 1.1,
               letterSpacing: '-0.02em'
             }}>
-              Amor y cuidado experto para <br />
-              <span className="text-gradient">tu mejor amigo</span>
+              {t('home.heroTitle')} <br />
+              <span className="text-gradient">Premium</span>
             </h1>
             <p style={{
               fontSize: '1.25rem',
@@ -59,17 +64,17 @@ export default function Home() {
               marginRight: 'auto',
               lineHeight: 1.6
             }}>
-              Conectamos dueños amorosos con cuidadores verificados. Paseos, alojamiento y visitas a domicilio con cobertura veterinaria premium.
+              {t('home.heroSubtitle')}
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/search">
                 <Button size="lg" className="shadow-lg hover:shadow-xl transition-all">
-                  Buscar Cuidador
+                  {t('home.findSitter')}
                 </Button>
               </Link>
               <Link href="/become-sitter">
                 <Button variant="secondary" size="lg">
-                  Quiero ser Cuidador
+                  {t('navbar.becomeSitter')}
                 </Button>
               </Link>
             </div>
@@ -91,7 +96,7 @@ export default function Home() {
             fontWeight: 'bold',
             border: '2px dashed rgba(79, 70, 229, 0.3)'
           }}>
-            [Imagen Hero: Perros y gatos felices jugando en un parque]
+            [Hero Image Placeholder]
           </div>
         </div>
       </section>
@@ -177,13 +182,13 @@ export default function Home() {
           </div>
           <div>
             <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '2rem', lineHeight: 1.2 }}>
-              Reserva en 3 simples pasos
+              {t('home.howItWorks')}
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
               {[
-                { step: '01', title: 'Busca', desc: 'Encuentra cuidadores verificados cerca de ti filtrando por servicio y precio.' },
-                { step: '02', title: 'Reserva', desc: 'Envía una solicitud y chatea con el cuidador para conocerse mejor.' },
-                { step: '03', title: 'Relájate', desc: 'Disfruta tu tiempo libre sabiendo que tu mascota está en buenas manos con actualizaciones fotográficas.' },
+                { step: '01', title: t('home.step1Title'), desc: t('home.step1Desc') },
+                { step: '02', title: t('home.step2Title'), desc: t('home.step2Desc') },
+                { step: '03', title: t('home.step3Title'), desc: t('home.step3Desc') },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: '1.5rem' }}>
                   <div style={{
@@ -215,12 +220,12 @@ export default function Home() {
           }}>
             <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1rem' }}>¿Listo para empezar?</h2>
             <p style={{ fontSize: '1.25rem', opacity: 0.9, marginBottom: '2.5rem', maxWidth: '600px', marginInline: 'auto' }}>
-              Únete a nuestra comunidad de amantes de las mascotas hoy mismo.
+              Únete a nuestra comunidad hoy mismo.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/signup">
                 <Button size="lg" style={{ background: 'white', color: 'var(--primary)' }}>
-                  Registrarse Gratis
+                  {t('navbar.signup')}
                 </Button>
               </Link>
             </div>

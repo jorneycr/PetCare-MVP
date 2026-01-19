@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import AuthProvider from '../components/providers/AuthProvider';
+import { LanguageProvider } from '../context/LanguageContext';
 
 export default function RootLayout({
   children,
@@ -22,9 +23,11 @@ export default function RootLayout({
     <html lang="es">
       <body className={inter.className}>
         <AuthProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <LanguageProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </LanguageProvider>
         </AuthProvider>
       </body>
     </html>

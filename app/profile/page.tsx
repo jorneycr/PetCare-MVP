@@ -7,8 +7,11 @@ import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import Link from 'next/link';
 
+import { useLanguage } from '@/context/LanguageContext';
+
 export default function ProfilePage() {
     const { data: session, status } = useSession();
+    const { t } = useLanguage();
     const router = useRouter();
     const [activeTab, setActiveTab] = useState('view'); // 'view' | 'edit' | 'sitter'
     const [loading, setLoading] = useState(true);
@@ -108,13 +111,13 @@ export default function ProfilePage() {
             const data = await res.json();
 
             if (res.ok) {
-                setSuccess('¡Perfil actualizado con éxito!');
+                setSuccess(t('profile.success'));
                 setTimeout(() => setSuccess(''), 3000);
             } else {
-                setError(data.error || 'Error al actualizar el perfil');
+                setError(data.error || t('profile.error'));
             }
         } catch (err) {
-            setError('Error de conexión');
+            setError(t('common.error'));
         } finally {
             setSaving(false);
         }
@@ -123,7 +126,7 @@ export default function ProfilePage() {
     if (status === 'loading' || loading) {
         return (
             <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <p>Cargando perfil...</p>
+                <p>{t('common.loading')}</p>
             </div>
         );
     }
@@ -161,8 +164,8 @@ export default function ProfilePage() {
                         }}>
                             {formData.name.charAt(0)}
                         </div>
-                        <h1 style={{ fontSize: '1.75rem', fontWeight: '800' }}>Mi Perfil</h1>
-                        <p style={{ color: 'var(--text-secondary)' }}>Bienvenido de nuevo a tu panel de control</p>
+                        <h1 style={{ fontSize: '1.75rem', fontWeight: '800' }}>{t('profile.title')}</h1>
+                        <p style={{ color: 'var(--text-secondary)' }}>{t('profile.subtitle')}</p>
                     </div>
 
                     {/* Sub-Navigation */}
@@ -172,10 +175,10 @@ export default function ProfilePage() {
                         marginBottom: '2rem',
                         overflowX: 'auto'
                     }}>
-                        <div onClick={() => setActiveTab('view')} style={navItemStyle(activeTab === 'view')}>Ver Perfil</div>
-                        <div onClick={() => setActiveTab('edit')} style={navItemStyle(activeTab === 'edit')}>Editar Datos</div>
+                        <div onClick={() => setActiveTab('view')} style={navItemStyle(activeTab === 'view')}>{t('profile.tabs.view')}</div>
+                        <div onClick={() => setActiveTab('edit')} style={navItemStyle(activeTab === 'edit')}>{t('profile.tabs.edit')}</div>
                         {(formData.userType === 'sitter' || formData.userType === 'both') && (
-                            <div onClick={() => setActiveTab('sitter')} style={navItemStyle(activeTab === 'sitter')}>Info Cuidador</div>
+                            <div onClick={() => setActiveTab('sitter')} style={navItemStyle(activeTab === 'sitter')}>{t('profile.tabs.sitter')}</div>
                         )}
                     </div>
 
@@ -210,12 +213,12 @@ export default function ProfilePage() {
                     {activeTab === 'view' && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <div style={{ padding: '1.5rem', background: '#F9FAFB', borderRadius: 'var(--radius-lg)' }}>
-                                <h3 style={{ marginBottom: '1rem', color: 'var(--text-main)', borderBottom: '1px solid #E5E7EB', paddingBottom: '0.5rem' }}>Información Básica</h3>
+                                <h3 style={{ marginBottom: '1rem', color: 'var(--text-main)', borderBottom: '1px solid #E5E7EB', paddingBottom: '0.5rem' }}>{t('profile.basicInfo')}</h3>
                                 <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: '0.5rem', fontSize: '0.9rem' }}>
-                                    <span style={{ fontWeight: 600 }}>Nombre:</span> <span>{formData.name}</span>
-                                    <span style={{ fontWeight: 600 }}>Email:</span> <span>{formData.email}</span>
-                                    <span style={{ fontWeight: 600 }}>Tipo:</span> <span style={{ textTransform: 'capitalize' }}>{formData.userType === 'owner' ? 'Dueño de Mascota' : formData.userType === 'sitter' ? 'Cuidador' : 'Ambos'}</span>
-                                    <span style={{ fontWeight: 600 }}>Ubicación:</span> <span>{formData.canton}, {formData.province}</span>
+                                    <span style={{ fontWeight: 600 }}>{t('profile.name')}:</span> <span>{formData.name}</span>
+                                    <span style={{ fontWeight: 600 }}>{t('profile.email')}:</span> <span>{formData.email}</span>
+                                    <span style={{ fontWeight: 600 }}>{t('profile.type')}:</span> <span style={{ textTransform: 'capitalize' }}>{formData.userType === 'owner' ? t('common.owner') : formData.userType === 'sitter' ? t('common.sitter') : t('common.both')}</span>
+                                    <span style={{ fontWeight: 600 }}>{t('profile.location')}:</span> <span>{formData.canton}, {formData.province}</span>
                                 </div>
                             </div>
 
@@ -224,7 +227,7 @@ export default function ProfilePage() {
                                     <div style={{ padding: '1.5rem', background: '#F9FAFB', borderRadius: 'var(--radius-lg)' }}>
                                         <h3 style={{ marginBottom: '1rem', color: 'var(--text-main)', borderBottom: '1px solid #E5E7EB', paddingBottom: '0.5rem' }}>Sobre {formData.name.split(' ')[0]}</h3>
                                         <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: formData.bio ? 'normal' : 'italic', whiteSpace: 'pre-wrap' }}>
-                                            {formData.bio || 'No has escrito una biografía aún.'}
+                                            {formData.bio || t('profile.noBio')}
                                         </p>
 
                                         <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
@@ -263,7 +266,7 @@ export default function ProfilePage() {
                                 </>
                             )}
 
-                            <Button onClick={() => setActiveTab('edit')} variant="outline">Editar Perfil</Button>
+                            <Button onClick={() => setActiveTab('edit')} variant="outline">{t('profile.editProfile')}</Button>
                         </div>
                     )}
 

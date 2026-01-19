@@ -5,9 +5,11 @@ import { useState, useEffect } from 'react';
 import { Button } from '../ui/Button';
 
 import { useSession, signOut } from 'next-auth/react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export function Navbar() {
     const { data: session, status } = useSession();
+    const { t, language, setLanguage } = useLanguage();
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -17,6 +19,10 @@ export function Navbar() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const toggleLanguage = () => {
+        setLanguage(language === 'es' ? 'en' : 'es');
+    };
 
     return (
         <header style={{
@@ -42,23 +48,43 @@ export function Navbar() {
 
                 {/* Desktop Nav */}
                 <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }} className="hidden-mobile">
-                    <Link href="/search" style={{ fontWeight: 500, color: 'var(--text-secondary)' }}>Buscar Cuidador</Link>
-                    <Link href="/services" style={{ fontWeight: 500, color: 'var(--text-secondary)' }}>Servicios</Link>
-                    <Link href="/become-sitter" style={{ fontWeight: 500, color: 'var(--text-secondary)' }}>Ser Cuidador</Link>
+                    <Link href="/search" style={{ fontWeight: 500, color: 'var(--text-secondary)' }}>{t('navbar.search')}</Link>
+                    <Link href="/services" style={{ fontWeight: 500, color: 'var(--text-secondary)' }}>{t('navbar.home')}</Link>
+                    <Link href="/become-sitter" style={{ fontWeight: 500, color: 'var(--text-secondary)' }}>{t('navbar.becomeSitter')}</Link>
                 </nav>
 
                 {/* Auth Buttons */}
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+
+                    {/* Language Switcher */}
+                    <button
+                        onClick={toggleLanguage}
+                        style={{
+                            background: 'none',
+                            border: '1px solid #E5E7EB',
+                            borderRadius: '20px',
+                            padding: '0.25rem 0.75rem',
+                            cursor: 'pointer',
+                            fontSize: '0.875rem',
+                            fontWeight: 500,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.25rem'
+                        }}
+                    >
+                        {language === 'es' ? '🇺🇸 EN' : '🇨🇷 ES'}
+                    </button>
+
                     {status === 'authenticated' ? (
                         <>
-                            <Link href="/profile" style={{ fontWeight: 600, color: 'var(--text-main)' }}>Bienvenido, {session.user?.name?.split(' ')[0]}</Link>
-                            <Button variant="outline" size="sm" onClick={() => signOut()}>Cerrar Sesión</Button>
+                            <Link href="/profile" style={{ fontWeight: 600, color: 'var(--text-main)' }}>{t('navbar.welcome')}, {session.user?.name?.split(' ')[0]}</Link>
+                            <Button variant="outline" size="sm" onClick={() => signOut()}>{t('navbar.logout')}</Button>
                         </>
                     ) : (
                         <>
-                            <Link href="/login" style={{ fontWeight: 600, color: 'var(--primary)' }}>Log in</Link>
+                            <Link href="/login" style={{ fontWeight: 600, color: 'var(--primary)' }}>{t('navbar.login')}</Link>
                             <Link href="/signup">
-                                <Button variant="primary" size="sm">Registrarse</Button>
+                                <Button variant="primary" size="sm">{t('navbar.signup')}</Button>
                             </Link>
                         </>
                     )}
