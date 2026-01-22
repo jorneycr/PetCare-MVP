@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/Card';
 import Link from 'next/link';
 
 import { useLanguage } from '@/context/LanguageContext';
+import { AMERICAN_COUNTRIES } from '@/utils/countries';
 
 export default function ProfilePage() {
     const { data: session, status } = useSession();
@@ -22,7 +23,7 @@ export default function ProfilePage() {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        country: 'Costa Rica',
+        country: '',
         province: '',
         canton: '',
         userType: 'owner' as 'owner' | 'sitter' | 'both',
@@ -50,7 +51,7 @@ export default function ProfilePage() {
                 setFormData({
                     name: data.user.name || '',
                     email: data.user.email || '',
-                    country: data.user.country || 'Costa Rica',
+                    country: data.user.country || '',
                     province: data.user.province || '',
                     canton: data.user.canton || '',
                     userType: data.user.userType || 'owner',
@@ -217,6 +218,11 @@ export default function ProfilePage() {
                                 <div style={{ display: 'grid', gridTemplateColumns: '120px 1fr', gap: '0.5rem', fontSize: '0.9rem' }}>
                                     <span style={{ fontWeight: 600 }}>{t('profile.name')}:</span> <span>{formData.name}</span>
                                     <span style={{ fontWeight: 600 }}>{t('profile.email')}:</span> <span>{formData.email}</span>
+                                    {formData.country && (
+                                        <>
+                                            <span style={{ fontWeight: 600 }}>País:</span> <span>{formData.country}</span>
+                                        </>
+                                    )}
                                     <span style={{ fontWeight: 600 }}>{t('profile.type')}:</span> <span style={{ textTransform: 'capitalize' }}>{formData.userType === 'owner' ? t('common.owner') : formData.userType === 'sitter' ? t('common.sitter') : t('common.both')}</span>
                                     <span style={{ fontWeight: 600 }}>{t('profile.location')}:</span> <span>{formData.canton}, {formData.province}</span>
                                 </div>
@@ -308,6 +314,31 @@ export default function ProfilePage() {
                                         outline: 'none',
                                     }}
                                 />
+                            </div>
+
+                            <div>
+                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>País</label>
+                                <select
+                                    value={formData.country}
+                                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                                    required
+                                    style={{
+                                        width: '100%',
+                                        padding: '0.75rem 1rem',
+                                        border: '1px solid #E5E7EB',
+                                        borderRadius: 'var(--radius-md)',
+                                        fontSize: '0.9rem',
+                                        background: 'white',
+                                        outline: 'none',
+                                    }}
+                                >
+                                    <option value="" disabled>Selecciona tu país</option>
+                                    {AMERICAN_COUNTRIES.map((country) => (
+                                        <option key={country} value={country}>
+                                            {country}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>

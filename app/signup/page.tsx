@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { AMERICAN_COUNTRIES } from '@/utils/countries';
 
 export default function SignupPage() {
     const router = useRouter();
@@ -13,7 +14,7 @@ export default function SignupPage() {
         email: '',
         password: '',
         userType: 'owner' as 'owner' | 'sitter' | 'both',
-        country: 'Costa Rica',
+        country: '',
         province: '',
         canton: '',
     });
@@ -161,6 +162,34 @@ export default function SignupPage() {
                                 onFocus={(e) => e.target.style.borderColor = 'var(--primary)'}
                                 onBlur={(e) => e.target.style.borderColor = '#E5E7EB'}
                             />
+                        </div>
+
+                        <div>
+                            <label htmlFor="country" style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
+                                País
+                            </label>
+                            <select
+                                id="country"
+                                value={formData.country}
+                                onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                                required
+                                style={{
+                                    width: '100%',
+                                    padding: '0.75rem 1rem',
+                                    border: '1px solid #E5E7EB',
+                                    borderRadius: 'var(--radius-md)',
+                                    fontSize: '0.9rem',
+                                    background: 'white',
+                                    outline: 'none',
+                                }}
+                            >
+                                <option value="" disabled>Selecciona tu país</option>
+                                {AMERICAN_COUNTRIES.map((country) => (
+                                    <option key={country} value={country}>
+                                        {country}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
 
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
