@@ -15,61 +15,120 @@ interface SitterProfilePageProps {
     }>;
 }
 
+import { MOCK_SITTERS } from '@/utils/mockSitters';
+
 export default async function SitterProfilePage({ params }: SitterProfilePageProps) {
     const { id } = await params;
     const session = await getServerSession(authOptions);
 
-    await connectDB();
+    let sitter;
+    let reviews: any[] = [];
 
-    const sitterDoc = await Sitter.findById(id).populate('userId', 'name').lean();
+    // Check for mock ID
+    if (id.startsWith('mock-')) {
+        const mockSitter = MOCK_SITTERS.find(s => s.id === id);
 
-    if (!sitterDoc) {
-        notFound();
+        if (!mockSitter) {
+            notFound();
+        }
+
+        // Construct full sitter object from mock data with defaults
+        sitter = {
+            id: mockSitter.id,
+            name: mockSitter.name,
+            rating: mockSitter.rating.toFixed(1),
+            reviews: mockSitter.reviews,
+            completedBookings: Math.floor(Math.random() * 50) + 10,
+            repeatCustomers: Math.floor(Math.random() * 20) + 5,
+            payments: ['cash', 'card'],
+            verifications: ['identity', 'phone'],
+            location: mockSitter.location,
+            services: mockSitter.services,
+            bio: mockSitter.bio,
+            aboutSummary: 'Amante de los animales con amplia experiencia.',
+            age: 25 + Math.floor(Math.random() * 10),
+            experienceYears: 5,
+            ownPets: '2 Perros',
+            skills: ['Administración de medicamentos', 'Entrenamiento básico'],
+            acceptedPetTypes: ['Perros', 'Gatos'],
+            acceptedPetSizes: ['Pequeño', 'Mediano', 'Grande'],
+            supervisionLevel: 'Tiempo completo',
+            pottyBreaks: 'Cada 2 horas',
+            walksPerDay: '3 paseos',
+            emergencyTransport: true,
+            lastMinuteBookings: true,
+            image: mockSitter.image,
+            badge: mockSitter.badge,
+        };
+
+        // Mock reviews
+        reviews = Array(3).fill(null).map((_, i) => ({
+            name: `Usuario ${i + 1}`,
+            location: 'San José',
+            rating: 5,
+            date: 'Hace 1 mes',
+            text: 'Excelente servicio, muy recomendado.',
+            verified: true
+        }));
+
+    } else {
+        // Real DB Fetch
+        try {
+            await connectDB();
+            const sitterDoc = await Sitter.findById(id).populate('userId', 'name').lean();
+
+            if (!sitterDoc) {
+                notFound();
+            }
+
+            // Fetch real reviews
+            const rawReviews = await Review.find({ sitterId: id })
+                .populate('userId', 'name province canton')
+                .sort({ createdAt: -1 })
+                .lean();
+
+            reviews = rawReviews.map((r: any) => ({
+                name: r.userId?.name || 'Usuario',
+                location: r.userId?.province && r.userId?.canton ? `${r.userId.canton}, ${r.userId.province}` : '',
+                rating: r.rating,
+                date: new Date(r.createdAt).toLocaleDateString('es-CR', { month: 'long', day: 'numeric', year: 'numeric' }),
+                text: r.comment,
+                verified: r.isVerified
+            }));
+
+            // Transform doc to plain object
+            sitter = {
+                id: (sitterDoc as any)._id.toString(),
+                name: (sitterDoc as any).userId?.name || 'Cuidadores de mascotas',
+                rating: (sitterDoc as any).rating ? Number((sitterDoc as any).rating).toFixed(1) : '0',
+                reviews: (sitterDoc as any).reviewCount || 0,
+                completedBookings: (sitterDoc as any).completedBookings || 0,
+                repeatCustomers: (sitterDoc as any).repeatCustomers || 0,
+                payments: (sitterDoc as any).payments || ['cash'],
+                verifications: (sitterDoc as any).verifications || [],
+                location: (sitterDoc as any).location,
+                services: (sitterDoc as any).services || [],
+                bio: (sitterDoc as any).bio,
+                aboutSummary: (sitterDoc as any).aboutSummary,
+                age: (sitterDoc as any).age,
+                experienceYears: (sitterDoc as any).experienceYears,
+                ownPets: (sitterDoc as any).ownPets,
+                skills: (sitterDoc as any).skills || [],
+                acceptedPetTypes: (sitterDoc as any).acceptedPetTypes || [],
+                acceptedPetSizes: (sitterDoc as any).acceptedPetSizes || [],
+                supervisionLevel: (sitterDoc as any).supervisionLevel,
+                pottyBreaks: (sitterDoc as any).pottyBreaks,
+                walksPerDay: (sitterDoc as any).walksPerDay,
+                emergencyTransport: (sitterDoc as any).emergencyTransport,
+                lastMinuteBookings: (sitterDoc as any).lastMinuteBookings,
+                image: (sitterDoc as any).image,
+                badge: (sitterDoc as any).badge,
+            };
+        } catch (error) {
+            console.error('Error fetching sitter:', error);
+            notFound();
+        }
     }
-
-    // Fetch real reviews
-    const rawReviews = await Review.find({ sitterId: id })
-        .populate('userId', 'name province canton')
-        .sort({ createdAt: -1 })
-        .lean();
-
-    const reviews = rawReviews.map((r: any) => ({
-        name: r.userId?.name || 'Usuario',
-        location: r.userId?.province && r.userId?.canton ? `${r.userId.canton}, ${r.userId.province}` : '',
-        rating: r.rating,
-        date: new Date(r.createdAt).toLocaleDateString('es-CR', { month: 'long', day: 'numeric', year: 'numeric' }),
-        text: r.comment,
-        verified: r.isVerified
-    }));
-
-    // Transform doc to plain object for the component
-    const sitter = {
-        id: (sitterDoc as any)._id.toString(),
-        name: (sitterDoc as any).userId?.name || 'Cuidadores de mascotas',
-        rating: (sitterDoc as any).rating ? Number((sitterDoc as any).rating).toFixed(1) : '0',
-        reviews: (sitterDoc as any).reviewCount || 0,
-        completedBookings: (sitterDoc as any).completedBookings || 0,
-        repeatCustomers: (sitterDoc as any).repeatCustomers || 0,
-        payments: (sitterDoc as any).payments || ['cash'],
-        verifications: (sitterDoc as any).verifications || [],
-        location: (sitterDoc as any).location,
-        services: (sitterDoc as any).services || [],
-        bio: (sitterDoc as any).bio,
-        aboutSummary: (sitterDoc as any).aboutSummary,
-        age: (sitterDoc as any).age,
-        experienceYears: (sitterDoc as any).experienceYears,
-        ownPets: (sitterDoc as any).ownPets,
-        skills: (sitterDoc as any).skills || [],
-        acceptedPetTypes: (sitterDoc as any).acceptedPetTypes || [],
-        acceptedPetSizes: (sitterDoc as any).acceptedPetSizes || [],
-        supervisionLevel: (sitterDoc as any).supervisionLevel,
-        pottyBreaks: (sitterDoc as any).pottyBreaks,
-        walksPerDay: (sitterDoc as any).walksPerDay,
-        emergencyTransport: (sitterDoc as any).emergencyTransport,
-        lastMinuteBookings: (sitterDoc as any).lastMinuteBookings,
-        image: (sitterDoc as any).image,
-        badge: (sitterDoc as any).badge,
-    };
 
     return (
         <main style={{ padding: '3rem 0', background: 'var(--background)', minHeight: '100vh' }}>

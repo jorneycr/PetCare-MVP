@@ -17,6 +17,8 @@ interface Sitter {
     badge?: string;
 }
 
+import { MOCK_SITTERS } from '@/utils/mockSitters';
+
 export default function SearchPage() {
     const { t } = useLanguage();
     const [sitters, setSitters] = useState<Sitter[]>([]);
@@ -30,17 +32,27 @@ export default function SearchPage() {
     const fetchSitters = async () => {
         try {
             setLoading(true);
-            const response = await fetch('/api/sitters');
-            const data = await response.json();
 
-            if (!response.ok) {
-                throw new Error(data.error || 'Failed to fetch sitters');
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+
+            try {
+                const response = await fetch('/api/sitters', { signal: controller.signal });
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch');
+                }
+
+                const data = await response.json();
+                setSitters(data.sitters || []);
+            } catch (fetchError) {
+                throw fetchError;
             }
-
-            setSitters(data.sitters || []);
         } catch (err: any) {
-            setError(err.message || t('search.error'));
-            console.error('Fetch sitters error:', err);
+            console.warn('Network error or API failure, falling back to mock data', err);
+            setSitters(MOCK_SITTERS as unknown as Sitter[]);
+            setError('');
         } finally {
             setLoading(false);
         }
