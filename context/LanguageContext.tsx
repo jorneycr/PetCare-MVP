@@ -15,16 +15,35 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const [language, setLanguage] = useState<Language>('es');
 
     useEffect(() => {
-        const storedLang = localStorage.getItem('language') as Language;
+        const storedLang = getCookie('language') as Language;
         if (storedLang && dictionary[storedLang]) {
             setLanguage(storedLang);
+        } else {
+            const lsLang = localStorage.getItem('language') as Language;
+            if (lsLang && dictionary[lsLang]) {
+                setLanguage(lsLang);
+                setCookie('language', lsLang);
+            }
         }
     }, []);
 
     const handleSetLanguage = (lang: Language) => {
         setLanguage(lang);
         localStorage.setItem('language', lang);
+        setCookie('language', lang);
     };
+
+    // Helper to set cookie
+    function setCookie(name: string, value: string) {
+        document.cookie = `${name}=${value}; path=/; max-age=${365 * 24 * 60 * 60}`;
+    }
+
+    // Helper to get cookie
+    function getCookie(name: string) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop()?.split(';').shift();
+    }
 
     const t = (path: string): string => {
         const keys = path.split('.');
