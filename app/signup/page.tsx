@@ -6,9 +6,12 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { AMERICAN_COUNTRIES } from '@/utils/countries';
+import { getLanguageFromCountry } from '@/utils/languageMapping';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function SignupPage() {
     const router = useRouter();
+    const { setLanguage } = useLanguage();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -171,7 +174,11 @@ export default function SignupPage() {
                             <select
                                 id="country"
                                 value={formData.country}
-                                onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                                onChange={(e) => {
+                                    const newCountry = e.target.value;
+                                    setFormData({ ...formData, country: newCountry });
+                                    setLanguage(getLanguageFromCountry(newCountry));
+                                }}
                                 required
                                 style={{
                                     width: '100%',

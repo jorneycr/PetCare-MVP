@@ -9,10 +9,11 @@ import Link from 'next/link';
 
 import { useLanguage } from '@/context/LanguageContext';
 import { AMERICAN_COUNTRIES } from '@/utils/countries';
+import { getLanguageFromCountry } from '@/utils/languageMapping';
 
 export default function ProfilePage() {
     const { data: session, status } = useSession();
-    const { t } = useLanguage();
+    const { t, setLanguage } = useLanguage();
     const router = useRouter();
     const [activeTab, setActiveTab] = useState('view'); // 'view' | 'edit' | 'sitter'
     const [loading, setLoading] = useState(true);
@@ -320,7 +321,11 @@ export default function ProfilePage() {
                                 <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>País</label>
                                 <select
                                     value={formData.country}
-                                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                                    onChange={(e) => {
+                                        const newCountry = e.target.value;
+                                        setFormData({ ...formData, country: newCountry });
+                                        setLanguage(getLanguageFromCountry(newCountry));
+                                    }}
                                     required
                                     style={{
                                         width: '100%',

@@ -6,10 +6,11 @@ import { Button } from '../ui/Button';
 
 import { useSession, signOut } from 'next-auth/react';
 import { useLanguage } from '@/context/LanguageContext';
+import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 
 export function Navbar() {
     const { data: session, status } = useSession();
-    const { t, language, setLanguage } = useLanguage();
+    const { t } = useLanguage();
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -20,9 +21,7 @@ export function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const toggleLanguage = () => {
-        setLanguage(language === 'es' ? 'en' : 'es');
-    };
+
 
     return (
         <header style={{
@@ -57,23 +56,8 @@ export function Navbar() {
                 <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
 
                     {/* Language Switcher */}
-                    <button
-                        onClick={toggleLanguage}
-                        style={{
-                            background: 'none',
-                            border: '1px solid #E5E7EB',
-                            borderRadius: '20px',
-                            padding: '0.25rem 0.75rem',
-                            cursor: 'pointer',
-                            fontSize: '0.875rem',
-                            fontWeight: 500,
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.25rem'
-                        }}
-                    >
-                        {language === 'es' ? '🇺🇸 EN' : '🇨🇷 ES'}
-                    </button>
+                    {/* Language Switcher */}
+                    <LanguageSwitcher />
 
                     {status === 'authenticated' ? (
                         <>
