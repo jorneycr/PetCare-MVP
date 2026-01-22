@@ -15,11 +15,29 @@ interface SitterProfilePageProps {
     }>;
 }
 
+import { cookies } from 'next/headers';
+import { dictionary, Language } from '@/utils/dictionaries';
 import { MOCK_SITTERS } from '@/utils/mockSitters';
 
 export default async function SitterProfilePage({ params }: SitterProfilePageProps) {
     const { id } = await params;
     const session = await getServerSession(authOptions);
+
+    // Get language from cookies
+    const cookieStore = await cookies();
+    const language = (cookieStore.get('language')?.value || 'es') as Language;
+    const dict = dictionary[language] || dictionary.es;
+
+    // Translation helper
+    const t = (path: string): string => {
+        const keys = path.split('.');
+        let current: any = dict;
+        for (const key of keys) {
+            if (!current[key]) return path;
+            current = current[key];
+        }
+        return current;
+    };
 
     let sitter;
     let reviews: any[] = [];
@@ -135,9 +153,9 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
             <div className="container">
                 {/* Breadcrumb */}
                 <div style={{ marginBottom: '2rem', fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                    <Link href="/" style={{ color: 'var(--primary)' }}>Inicio</Link>
+                    <Link href="/" style={{ color: 'var(--primary)' }}>{t('navbar.home')}</Link>
                     {' > '}
-                    <Link href="/search" style={{ color: 'var(--primary)' }}>Buscar</Link>
+                    <Link href="/search" style={{ color: 'var(--primary)' }}>{t('navbar.search')}</Link>
                     {' > '}
                     <span>{sitter.name}</span>
                 </div>
@@ -192,10 +210,10 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                             <span style={{ color: '#FCD34D', fontSize: '1.25rem' }}>★</span>
                                             <span style={{ fontWeight: 700, fontSize: '1.125rem' }}>{sitter.rating}</span>
-                                            <span style={{ color: 'var(--text-light)' }}>({sitter.reviews} reseñas)</span>
+                                            <span style={{ color: 'var(--text-light)' }}>({sitter.reviews} {t('sitter.reviews')})</span>
                                         </div>
                                         <div style={{ color: 'var(--text-secondary)' }}>
-                                            ✓ Verificado
+                                            ✓ {t('sitter.verified')}
                                         </div>
                                     </div>
                                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
@@ -208,12 +226,12 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                                 fontSize: '0.875rem',
                                                 fontWeight: 500
                                             }}>
-                                                {s.type === 'boarding' ? '🏠 Alojamiento' :
-                                                    s.type === 'walking' ? '🦮 Paseo' :
-                                                        s.type === 'daycare' ? '☀️ Guardería' :
-                                                            s.type === 'taxi' ? '🚗 Taxi' :
-                                                                s.type === 'grooming' ? '✂️ Grooming' :
-                                                                    s.type === 'training' ? '🎓 Entrenamiento' : '🐱 Visitas'}
+                                                {s.type === 'boarding' ? t('sitter.boarding') :
+                                                    s.type === 'walking' ? t('sitter.walking') :
+                                                        s.type === 'daycare' ? t('sitter.daycare') :
+                                                            s.type === 'taxi' ? t('sitter.taxi') :
+                                                                s.type === 'grooming' ? t('sitter.grooming') :
+                                                                    s.type === 'training' ? t('sitter.training') : t('sitter.visits')}
                                             </span>
                                         ))}
                                     </div>
@@ -235,43 +253,43 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                 <div style={{ fontSize: '1.25rem' }}>🗓️</div>
                                 <div>
                                     <div style={{ fontWeight: 700, fontSize: '1.125rem' }}>{sitter.completedBookings}</div>
-                                    <div style={{ fontSize: '0.75rem', color: '#92400E' }}>Reservas Completadas</div>
+                                    <div style={{ fontSize: '0.75rem', color: '#92400E' }}>{t('sitter.completedBookings')}</div>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                 <div style={{ fontSize: '1.25rem' }}>👥</div>
                                 <div>
                                     <div style={{ fontWeight: 700, fontSize: '1.125rem' }}>{sitter.repeatCustomers}</div>
-                                    <div style={{ fontSize: '0.75rem', color: '#92400E' }}>Clientes Recurrentes</div>
+                                    <div style={{ fontSize: '0.75rem', color: '#92400E' }}>{t('sitter.repeatCustomers')}</div>
                                 </div>
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                 <div style={{ fontSize: '1.25rem' }}>📊</div>
                                 <div>
                                     <div style={{ fontWeight: 700, fontSize: '1.125rem' }}>3</div>
-                                    <div style={{ fontSize: '0.75rem', color: '#92400E' }}>Reservas este mes</div>
+                                    <div style={{ fontSize: '0.75rem', color: '#92400E' }}>{t('sitter.bookingsMonth')}</div>
                                 </div>
                             </div>
                         </div>
 
                         {/* About & Person Info */}
                         <Card>
-                            <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem' }}>Sobre {sitter.name.split(' ')[0]}</h2>
+                            <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem' }}>{t('sitter.about')} {sitter.name.split(' ')[0]}</h2>
                             <div style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem' }}>
                                 {sitter.bio}
                             </div>
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid #F3F4F6' }}>
                                 <div>
-                                    <h3 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-light)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Información Personal</h3>
+                                    <h3 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-light)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{t('sitter.personalInfo')}</h3>
                                     <ul style={{ listStyle: 'none', padding: 0, fontSize: '0.9rem' }}>
-                                        <li style={{ marginBottom: '0.5rem' }}>🎂 <b>Edad:</b> {sitter.age || '28'} años</li>
-                                        <li style={{ marginBottom: '0.5rem' }}>⭐ <b>Experiencia:</b> {sitter.experienceYears || '10'} años</li>
-                                        <li style={{ marginBottom: '0.5rem' }}>🐾 <b>Mascotas propias:</b> {sitter.ownPets || '1 Perro'}</li>
+                                        <li style={{ marginBottom: '0.5rem' }}>🎂 <b>{t('sitter.age')}:</b> {sitter.age || '28'}</li>
+                                        <li style={{ marginBottom: '0.5rem' }}>⭐ <b>{t('sitter.experience')}:</b> {sitter.experienceYears || '10'}</li>
+                                        <li style={{ marginBottom: '0.5rem' }}>🐾 <b>{t('sitter.ownPets')}:</b> {sitter.ownPets || '1 Perro'}</li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <h3 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-light)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Habilidades</h3>
+                                    <h3 style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--text-light)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{t('sitter.skills')}</h3>
                                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                                         {(sitter.skills as string[]).map(skill => (
                                             <span key={skill} style={{ fontSize: '0.8rem', background: '#F0F9FF', color: '#0369A1', padding: '0.2rem 0.6rem', borderRadius: '4px', fontWeight: 500 }}>
@@ -279,7 +297,7 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                             </span>
                                         ))}
                                         {sitter.skills.length === 0 && (
-                                            <span style={{ fontSize: '0.8rem', color: 'var(--text-light)' }}>Sin habilidades especificadas</span>
+                                            <span style={{ fontSize: '0.8rem', color: 'var(--text-light)' }}>{t('sitter.noSkills')}</span>
                                         )}
                                     </div>
                                 </div>
@@ -288,47 +306,47 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
 
                         {/* Detailed Preferences / Service Info */}
                         <Card>
-                            <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem' }}>Detalles del Servicio</h2>
+                            <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem' }}>{t('sitter.serviceDetails')}</h2>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
                                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                                     <div style={{ fontSize: '1.25rem' }}>🐕</div>
                                     <div>
-                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>TIPOS DE MASCOTAS</div>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>{t('sitter.petTypes')}</div>
                                         <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{sitter.acceptedPetTypes.join(', ') || 'Perros'}</div>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                                     <div style={{ fontSize: '1.25rem' }}>📏</div>
                                     <div>
-                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>TAMAÑOS ACEPTADOS</div>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>{t('sitter.petSizes')}</div>
                                         <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{sitter.acceptedPetSizes.join(', ') || 'Pequeño, Mediano'}</div>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                                     <div style={{ fontSize: '1.25rem' }}>🏠</div>
                                     <div>
-                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>SUPERVISIÓN ADULTA</div>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>{t('sitter.supervision')}</div>
                                         <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{sitter.supervisionLevel || 'Constante'}</div>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                                     <div style={{ fontSize: '1.25rem' }}>💩</div>
                                     <div>
-                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>SALIDAS AL BAÑO</div>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>{t('sitter.pottyBreaks')}</div>
                                         <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{sitter.pottyBreaks || 'Acceso total'}</div>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                                     <div style={{ fontSize: '1.25rem' }}>🦮</div>
                                     <div>
-                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>PASEOS POR DÍA</div>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>{t('sitter.walksPerDay')}</div>
                                         <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{sitter.walksPerDay || '3+'}</div>
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '0.75rem' }}>
                                     <div style={{ fontSize: '1.25rem' }}>🚑</div>
                                     <div>
-                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>TRANSPORTE EMERG.</div>
+                                        <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>{t('sitter.emergencyTransport')}</div>
                                         <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{sitter.emergencyTransport ? 'Sí' : 'No'}</div>
                                     </div>
                                 </div>
@@ -337,9 +355,9 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
 
                         {/* Neighbourhood / Map */}
                         <Card>
-                            <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '0.5rem' }}>Ubicación</h2>
+                            <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '0.5rem' }}>{t('sitter.locationTitle')}</h2>
                             <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-                                {sitter.name} se encuentra en <b>{sitter.location}</b>. La ubicación exacta se compartirá después de la reserva.
+                                {sitter.name} {t('sitter.locationDesc')}
                             </p>
                             <div style={{
                                 height: '250px',
@@ -357,14 +375,14 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                     style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }}
                                 />
                                 <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'white', padding: '0.5rem 1rem', borderRadius: 'var(--radius-full)', boxShadow: 'var(--shadow-md)', fontWeight: 700, color: 'var(--primary)' }}>
-                                    📍 Área de Servicio
+                                    📍 {t('sitter.serviceArea')}
                                 </div>
                             </div>
                         </Card>
 
                         {/* Services & Pricing */}
                         <Card>
-                            <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem' }}>Servicios y Precios</h2>
+                            <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '1.5rem' }}>{t('sitter.servicesPricing')}</h2>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                 {sitter.services.map((service: any) => (
                                     <div key={service.type} style={{
@@ -378,20 +396,20 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                     }}>
                                         <div>
                                             <h3 style={{ fontWeight: 600, marginBottom: '0.25rem' }}>
-                                                {service.type === 'boarding' ? '🏠 Alojamiento' :
-                                                    service.type === 'walking' ? '🦮 Paseo' :
-                                                        service.type === 'daycare' ? '☀️ Guardería' :
-                                                            service.type === 'taxi' ? '🚗 Pet Taxi' :
-                                                                service.type === 'grooming' ? '✂️ Pet Grooming' :
-                                                                    service.type === 'training' ? '🎓 Pet Training' : '🐱 Visitas a Domicilio'}
+                                                {service.type === 'boarding' ? t('sitter.boarding') :
+                                                    service.type === 'walking' ? t('sitter.walking') :
+                                                        service.type === 'daycare' ? t('sitter.daycare') :
+                                                            service.type === 'taxi' ? t('sitter.taxi') :
+                                                                service.type === 'grooming' ? t('sitter.grooming') :
+                                                                    service.type === 'training' ? t('sitter.training') : t('sitter.visits')}
                                             </h3>
                                             <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>
-                                                {service.type === 'boarding' ? 'Por noche' :
-                                                    service.type === 'walking' ? 'Por paseo (30 min)' :
-                                                        service.type === 'daycare' ? 'Por día' :
-                                                            service.type === 'taxi' ? 'Por trayecto' :
-                                                                service.type === 'grooming' ? 'Por sesión' :
-                                                                    service.type === 'training' ? 'Por clase' : 'Por visita'}
+                                                {service.type === 'boarding' ? t('sitter.perNight') :
+                                                    service.type === 'walking' ? t('sitter.perWalk') :
+                                                        service.type === 'daycare' ? t('sitter.perDay') :
+                                                            service.type === 'taxi' ? t('sitter.perTrip') :
+                                                                service.type === 'grooming' ? t('sitter.perSession') :
+                                                                    service.type === 'training' ? t('sitter.perClass') : t('sitter.perVisit')}
                                             </p>
                                         </div>
                                         <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--primary)' }}>
@@ -406,11 +424,11 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                         <Card>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                                 <h2 style={{ fontSize: '1.5rem', fontWeight: '700' }}>
-                                    Reseñas ({reviews.length})
+                                    {t('sitter.writeReview')} ({reviews.length})
                                 </h2>
                                 {!session ? (
                                     <Link href={`/login?callbackUrl=/sitter/${id}`}>
-                                        <Button variant="outline" size="sm">Escribir Reseña</Button>
+                                        <Button variant="outline" size="sm">{t('sitter.writeReview')}</Button>
                                     </Link>
                                 ) : (
                                     <ReviewForm sitterId={id} />
@@ -449,7 +467,7 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                 ) : (
                                     <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-secondary)' }}>
                                         <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>⭐</div>
-                                        <p>Aún no hay reseñas. ¡Sé el primero en compartir tu experiencia!</p>
+                                        <p>{t('sitter.noReviews')}</p>
                                     </div>
                                 )}
                             </div>
@@ -474,11 +492,11 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                         <div style={{ fontSize: '1.25rem' }}>🤝</div>
                                         <div>
-                                            <div style={{ fontWeight: 600, fontSize: '0.875rem' }}>Talk & Greet</div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Conócense antes de reservar</div>
+                                            <div style={{ fontWeight: 600, fontSize: '0.875rem' }}>{t('sitter.talkGreet')}</div>
+                                            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{t('sitter.talkGreetDesc')}</div>
                                         </div>
                                     </div>
-                                    <div style={{ fontWeight: 700, color: 'var(--primary)', fontSize: '0.875rem' }}>GRATIS</div>
+                                    <div style={{ fontWeight: 700, color: 'var(--primary)', fontSize: '0.875rem' }}>{t('sitter.free')}</div>
                                 </div>
 
                                 <Button fullWidth variant="outline" style={{
@@ -487,17 +505,17 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                     fontWeight: 700,
                                     height: '50px'
                                 }}>
-                                    CONTACTAR
+                                    {t('sitter.contact')}
                                 </Button>
 
                                 <div style={{ textAlign: 'center', margin: '1rem 0' }}>
                                     <hr style={{ border: 'none', borderTop: '1px solid #E5E7EB', marginBottom: '-0.65rem' }} />
-                                    <span style={{ background: 'white', padding: '0 0.75rem', fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 500 }}>O HAZ UNA RESERVA</span>
+                                    <span style={{ background: 'white', padding: '0 0.75rem', fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 500 }}>{t('sitter.bookOption')}</span>
                                 </div>
 
                                 <div>
                                     <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                                        Seleccionar Servicio
+                                        {t('sitter.selectService')}
                                     </label>
                                     <select style={{
                                         width: '100%',
@@ -510,12 +528,12 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                     }}>
                                         {sitter.services.map((s: any) => (
                                             <option key={s.type} value={s.type}>
-                                                {s.type === 'boarding' ? '🏠 Alojamiento' :
-                                                    s.type === 'walking' ? '🦮 Paseo' :
-                                                        s.type === 'daycare' ? '☀️ Guardería' :
-                                                            s.type === 'taxi' ? '🚗 Pet Taxi' :
-                                                                s.type === 'grooming' ? '✂️ Pet Grooming' :
-                                                                    s.type === 'training' ? '🎓 Pet Training' : '🐱 Visitas'}
+                                                {s.type === 'boarding' ? t('sitter.boarding') :
+                                                    s.type === 'walking' ? t('sitter.walking') :
+                                                        s.type === 'daycare' ? t('sitter.daycare') :
+                                                            s.type === 'taxi' ? t('sitter.taxi') :
+                                                                s.type === 'grooming' ? t('sitter.grooming') :
+                                                                    s.type === 'training' ? t('sitter.training') : t('sitter.visits')}
                                                 {' - ₡'}{s.price.toLocaleString()}
                                             </option>
                                         ))}
@@ -523,12 +541,12 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                 </div>
 
                                 <Button fullWidth size="lg" style={{ height: '54px', fontSize: '1.125rem' }}>
-                                    SOLICITAR RESERVA
+                                    {t('sitter.requestBooking')}
                                 </Button>
                             </div>
 
                             <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5, textAlign: 'center', marginBottom: '1.5rem' }}>
-                                Reserva via <span style={{ color: 'var(--primary)', fontWeight: 700 }}>PetCare</span> para disfrutar de <span style={{ fontWeight: 600 }}>Seguro Premium</span>, soporte 24/7 y garantía de pago seguro.
+                                {t('sitter.guarantee')}
                             </p>
 
                             {/* Payment Methods */}
@@ -558,8 +576,8 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
 
                             <div style={{ marginTop: '1rem', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', borderTop: '1px solid #F3F4F6', paddingTop: '1.5rem' }}>
                                 {[
-                                    { label: 'Reservas', val: sitter.completedBookings, color: '#9333EA', icon: '14' },
-                                    { label: 'Repetidos', val: sitter.repeatCustomers, color: '#0891B2', icon: '4' },
+                                    { label: t('sitter.completedBookings'), val: sitter.completedBookings, color: '#9333EA', icon: '14' },
+                                    { label: t('sitter.repeatCustomers'), val: sitter.repeatCustomers, color: '#0891B2', icon: '4' },
                                     { label: 'Fieles', val: 6, color: '#0891B2', icon: '6' },
                                     { label: 'Mobile', val: '', color: '#EA580C', icon: '📱' },
                                     { label: 'FB', val: '', color: '#1E40AF', icon: 'f' },
