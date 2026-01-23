@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { Sitter } from '@/lib/data/sitterData';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface SitterListCardProps {
     sitter: Sitter;
 }
 
 export function SitterListCard({ sitter }: SitterListCardProps) {
+    const { t } = useLanguage();
     const lowestPrice = Math.min(...sitter.services.map(s => s.price));
 
     return (
@@ -80,9 +82,9 @@ export function SitterListCard({ sitter }: SitterListCardProps) {
                         fontWeight: 500,
                         textTransform: 'capitalize'
                     }}>
-                        {s.type === 'boarding' ? '🏠 Alojamiento' :
-                            s.type === 'walking' ? '🦮 Paseo' :
-                                s.type === 'daycare' ? '☀️ Guardería' : '🐱 Visitas'}
+                        {s.type === 'boarding' ? `🏠 ${t('home.services.boarding')}` :
+                            s.type === 'walking' ? `🦮 ${t('home.services.walking')}` :
+                                s.type === 'daycare' ? `☀️ ${t('home.services.daycare')}` : `🐱 ${t('home.services.visits')}`}
                     </span>
                 ))}
             </div>
@@ -111,13 +113,13 @@ export function SitterListCard({ sitter }: SitterListCardProps) {
                 alignItems: 'center'
             }}>
                 <div>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-light)', display: 'block' }}>Desde</span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--text-light)', display: 'block' }}>{t('common.from')}</span>
                     <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary)' }}>
                         ₡{lowestPrice.toLocaleString()}
                     </span>
                 </div>
                 <Link href={`/sitter/${sitter.id}`}>
-                    <Button size="sm">Ver Perfil</Button>
+                    <Button size="sm">{t('common.viewProfile')}</Button>
                 </Link>
             </div>
         </Card>
