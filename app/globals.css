@@ -116,3 +116,13 @@ button {
 .card-hover { cursor: pointer; }
 .card-hover:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg) !important; border-color: var(--primary) !important; }
 @media (max-width: 768px) { .hidden-mobile { display: none !important; } }
+
+/* ChatBot Animations */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chatbot-window {
+  animation: slideUp 0.3s ease-out;
+}

@@ -13,6 +13,7 @@ import { Navbar } from '../components/layout/Navbar';
 import { Footer } from '../components/layout/Footer';
 import AuthProvider from '../components/providers/AuthProvider';
 import { LanguageProvider } from '../context/LanguageContext';
+import { ChatBot } from '../components/ui/ChatBot';
 
 export default function RootLayout({
   children,
@@ -26,6 +27,7 @@ export default function RootLayout({
           <LanguageProvider>
             <Navbar />
             {children}
+            <ChatBot />
             <Footer />
           </LanguageProvider>
         </AuthProvider>

@@ -11,7 +11,7 @@ import { useLanguage } from '@/context/LanguageContext';
 
 export default function SignupPage() {
     const router = useRouter();
-    const { setLanguage } = useLanguage();
+    const { t, setLanguage } = useLanguage();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -39,14 +39,14 @@ export default function SignupPage() {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.error || 'Registration failed');
+                throw new Error(data.error || t('auth.signup.error'));
             }
 
             // Success - redirect to login
-            alert('¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.');
+            alert(t('auth.signup.success'));
             router.push('/login');
         } catch (err: any) {
-            setError(err.message || 'Error al crear la cuenta');
+            setError(err.message || t('auth.signup.error'));
         } finally {
             setLoading(false);
         }
@@ -70,10 +70,10 @@ export default function SignupPage() {
                             <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>PetCare</span>
                         </Link>
                         <h1 style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '1rem', marginBottom: '0.5rem' }}>
-                            Crea tu cuenta
+                            {t('auth.signup.title')}
                         </h1>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                            Únete a nuestra comunidad de amantes de mascotas
+                            {t('auth.signup.subtitle')}
                         </p>
                     </div>
 
@@ -94,7 +94,7 @@ export default function SignupPage() {
 
                         <div>
                             <label htmlFor="name" style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                                Nombre Completo
+                                {t('auth.signup.name')}
                             </label>
                             <input
                                 type="text"
@@ -119,7 +119,7 @@ export default function SignupPage() {
 
                         <div>
                             <label htmlFor="email" style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                                Correo Electrónico
+                                {t('auth.signup.email')}
                             </label>
                             <input
                                 type="email"
@@ -144,12 +144,12 @@ export default function SignupPage() {
 
                         <div>
                             <label htmlFor="password" style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                                Contraseña
+                                {t('auth.signup.password')}
                             </label>
                             <input
                                 type="password"
                                 id="password"
-                                placeholder="Mínimo 8 caracteres"
+                                placeholder={t('auth.signup.passwordHint')}
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                 required
@@ -169,7 +169,7 @@ export default function SignupPage() {
 
                         <div>
                             <label htmlFor="country" style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                                País
+                                {t('auth.signup.country')}
                             </label>
                             <select
                                 id="country"
@@ -190,7 +190,7 @@ export default function SignupPage() {
                                     outline: 'none',
                                 }}
                             >
-                                <option value="" disabled>Selecciona tu país</option>
+                                <option value="" disabled>{t('auth.signup.countryPlaceholder')}</option>
                                 {AMERICAN_COUNTRIES.map((country) => (
                                     <option key={country} value={country}>
                                         {country}
@@ -202,7 +202,7 @@ export default function SignupPage() {
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                             <div>
                                 <label htmlFor="province" style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                                    Provincia
+                                    {t('auth.signup.province')}
                                 </label>
                                 <input
                                     type="text"
@@ -223,7 +223,7 @@ export default function SignupPage() {
                             </div>
                             <div>
                                 <label htmlFor="canton" style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                                    Cantón
+                                    {t('auth.signup.canton')}
                                 </label>
                                 <input
                                     type="text"
@@ -246,7 +246,7 @@ export default function SignupPage() {
 
                         <div>
                             <label htmlFor="userType" style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                                Quiero registrarme como
+                                {t('auth.signup.userType')}
                             </label>
                             <select
                                 id="userType"
@@ -263,35 +263,36 @@ export default function SignupPage() {
                                     cursor: 'pointer'
                                 }}
                             >
-                                <option value="owner">Dueño de Mascota</option>
-                                <option value="sitter">Cuidador</option>
-                                <option value="both">Ambos</option>
+                                <option value="owner">{t('auth.signup.types.owner')}</option>
+                                <option value="sitter">{t('auth.signup.types.sitter')}</option>
+                                <option value="both">{t('auth.signup.types.both')}</option>
                             </select>
                         </div>
 
                         <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', cursor: 'pointer', fontSize: '0.875rem' }}>
                             <input type="checkbox" style={{ accentColor: 'var(--primary)', marginTop: '0.25rem' }} />
                             <span style={{ color: 'var(--text-secondary)' }}>
-                                Acepto los{' '}
-                                <Link href="/terms" style={{ color: 'var(--primary)', fontWeight: 600 }}>
-                                    Términos y Condiciones
-                                </Link>
-                                {' '}y la{' '}
-                                <Link href="/privacy" style={{ color: 'var(--primary)', fontWeight: 600 }}>
-                                    Política de Privacidad
-                                </Link>
+                                {t('auth.signup.terms')
+                                    .replace('{terms}', '___TERMS___')
+                                    .replace('{privacy}', '___PRIVACY___')
+                                    .split('___')
+                                    .map((part, i) => {
+                                        if (part === 'TERMS') return <Link key={i} href="/terms" style={{ color: 'var(--primary)', fontWeight: 600 }}>{t('auth.signup.termsLink')}</Link>;
+                                        if (part === 'PRIVACY') return <Link key={i} href="/privacy" style={{ color: 'var(--primary)', fontWeight: 600 }}>{t('auth.signup.privacyLink')}</Link>;
+                                        return part;
+                                    })}
                             </span>
                         </label>
 
                         <Button type="submit" fullWidth size="lg" isLoading={loading} disabled={loading}>
-                            {loading ? 'Creando cuenta...' : 'Crear Cuenta'}
+                            {loading ? t('auth.signup.submitting') : t('auth.signup.submit')}
                         </Button>
                     </form>
 
                     {/* Divider */}
                     <div style={{ display: 'flex', alignItems: 'center', margin: '1.5rem 0', gap: '1rem' }}>
                         <div style={{ flex: 1, height: '1px', background: '#E5E7EB' }} />
-                        <span style={{ color: 'var(--text-light)', fontSize: '0.875rem' }}>o</span>
+                        <span style={{ color: 'var(--text-light)', fontSize: '0.875rem' }}>{t('auth.signup.or')}</span>
                         <div style={{ flex: 1, height: '1px', background: '#E5E7EB' }} />
                     </div>
 
@@ -311,7 +312,7 @@ export default function SignupPage() {
                             cursor: 'pointer',
                             transition: 'all 0.2s'
                         }}>
-                            <span>🔵</span> Continuar con Google
+                            <span>🔵</span> {t('auth.signup.google')}
                         </button>
                         <button style={{
                             width: '100%',
@@ -327,15 +328,15 @@ export default function SignupPage() {
                             cursor: 'pointer',
                             transition: 'all 0.2s'
                         }}>
-                            <span>📘</span> Continuar con Facebook
+                            <span>📘</span> {t('auth.signup.facebook')}
                         </button>
                     </div>
 
                     {/* Footer */}
                     <p style={{ textAlign: 'center', marginTop: '2rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
-                        ¿Ya tienes cuenta?{' '}
+                        {t('auth.signup.hasAccount')}{' '}
                         <Link href="/login" style={{ color: 'var(--primary)', fontWeight: 600 }}>
-                            Inicia sesión
+                            {t('auth.signup.login')}
                         </Link>
                     </p>
                 </Card>

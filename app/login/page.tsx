@@ -6,8 +6,10 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function LoginPage() {
+    const { t } = useLanguage();
     const router = useRouter();
     const [formData, setFormData] = useState({
         email: '',
@@ -36,7 +38,7 @@ export default function LoginPage() {
             router.push('/');
             router.refresh();
         } catch (err: any) {
-            setError(err.message || 'Error al iniciar sesión');
+            setError(err.message || t('auth.login.error'));
         } finally {
             setLoading(false);
         }
@@ -60,10 +62,10 @@ export default function LoginPage() {
                             <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>PetCare</span>
                         </Link>
                         <h1 style={{ fontSize: '1.75rem', fontWeight: '800', marginTop: '1rem', marginBottom: '0.5rem' }}>
-                            Bienvenido de nuevo
+                            {t('auth.login.title')}
                         </h1>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                            Inicia sesión para continuar
+                            {t('auth.login.subtitle')}
                         </p>
                     </div>
 
@@ -83,7 +85,7 @@ export default function LoginPage() {
                         )}
                         <div>
                             <label htmlFor="email" style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                                Correo Electrónico
+                                {t('auth.login.email')}
                             </label>
                             <input
                                 type="email"
@@ -108,7 +110,7 @@ export default function LoginPage() {
 
                         <div>
                             <label htmlFor="password" style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>
-                                Contraseña
+                                {t('auth.login.password')}
                             </label>
                             <input
                                 type="password"
@@ -134,22 +136,22 @@ export default function LoginPage() {
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.875rem' }}>
                             <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
                                 <input type="checkbox" style={{ accentColor: 'var(--primary)' }} />
-                                <span style={{ color: 'var(--text-secondary)' }}>Recordarme</span>
+                                <span style={{ color: 'var(--text-secondary)' }}>{t('auth.login.rememberMe')}</span>
                             </label>
                             <Link href="/forgot-password" style={{ color: 'var(--primary)', fontWeight: 600 }}>
-                                ¿Olvidaste tu contraseña?
+                                {t('auth.login.forgotPassword')}
                             </Link>
                         </div>
 
                         <Button type="submit" fullWidth size="lg" isLoading={loading} disabled={loading}>
-                            {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+                            {loading ? t('auth.login.submitting') : t('auth.login.submit')}
                         </Button>
                     </form>
 
                     {/* Divider */}
                     <div style={{ display: 'flex', alignItems: 'center', margin: '1.5rem 0', gap: '1rem' }}>
                         <div style={{ flex: 1, height: '1px', background: '#E5E7EB' }} />
-                        <span style={{ color: 'var(--text-light)', fontSize: '0.875rem' }}>o</span>
+                        <span style={{ color: 'var(--text-light)', fontSize: '0.875rem' }}>{t('auth.login.or')}</span>
                         <div style={{ flex: 1, height: '1px', background: '#E5E7EB' }} />
                     </div>
 
@@ -169,7 +171,7 @@ export default function LoginPage() {
                             cursor: 'pointer',
                             transition: 'all 0.2s'
                         }}>
-                            <span>🔵</span> Continuar con Google
+                            <span>🔵</span> {t('auth.login.google')}
                         </button>
                         <button style={{
                             width: '100%',
@@ -185,15 +187,15 @@ export default function LoginPage() {
                             cursor: 'pointer',
                             transition: 'all 0.2s'
                         }}>
-                            <span>📘</span> Continuar con Facebook
+                            <span>📘</span> {t('auth.login.facebook')}
                         </button>
                     </div>
 
                     {/* Footer */}
                     <p style={{ textAlign: 'center', marginTop: '2rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
-                        ¿No tienes cuenta?{' '}
+                        {t('auth.login.noAccount')}{' '}
                         <Link href="/signup" style={{ color: 'var(--primary)', fontWeight: 600 }}>
-                            Regístrate gratis
+                            {t('auth.login.signup')}
                         </Link>
                     </p>
                 </Card>

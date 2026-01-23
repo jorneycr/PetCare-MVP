@@ -139,6 +139,77 @@ export const dictionary = {
             selectService: 'Seleccionar Servicio',
             requestBooking: 'SOLICITAR RESERVA',
             guarantee: 'Reserva via PetCare para disfrutar de Seguro Premium, soporte 24/7 y garantía de pago seguro.'
+        },
+        auth: {
+            login: {
+                title: 'Bienvenido de nuevo',
+                subtitle: 'Inicia sesión para continuar',
+                email: 'Correo Electrónico',
+                password: 'Contraseña',
+                rememberMe: 'Recordarme',
+                forgotPassword: '¿Olvidaste tu contraseña?',
+                submit: 'Iniciar Sesión',
+                submitting: 'Iniciando sesión...',
+                or: 'o',
+                google: 'Continuar con Google',
+                facebook: 'Continuar con Facebook',
+                noAccount: '¿No tienes cuenta?',
+                signup: 'Regístrate gratis',
+                error: 'Error al iniciar sesión'
+            },
+            signup: {
+                title: 'Crea tu cuenta',
+                subtitle: 'Únete a nuestra comunidad de amantes de mascotas',
+                name: 'Nombre Completo',
+                email: 'Correo Electrónico',
+                password: 'Contraseña',
+                passwordHint: 'Mínimo 8 caracteres',
+                country: 'País',
+                countryPlaceholder: 'Selecciona tu país',
+                province: 'Provincia',
+                canton: 'Cantón',
+                userType: 'Quiero registrarme como',
+                types: {
+                    owner: 'Dueño de Mascota',
+                    sitter: 'Cuidador',
+                    both: 'Ambos'
+                },
+                terms: 'Acepto los {terms} y la {privacy}',
+                termsLink: 'Términos y Condiciones',
+                privacyLink: 'Política de Privacidad',
+                submit: 'Crear Cuenta',
+                submitting: 'Creando cuenta...',
+                success: '¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.',
+                error: 'Error al crear la cuenta',
+                or: 'o',
+                google: 'Continuar con Google',
+                facebook: 'Continuar con Facebook',
+                hasAccount: '¿Ya tienes cuenta?',
+                login: 'Inicia sesión'
+            }
+        },
+        profile: {
+            title: 'Perfil',
+            subtitle: 'Administra tu cuenta y configura tus preferencias',
+            tabs: {
+                view: 'Ver Perfil',
+                edit: 'Editar Datos',
+                sitter: 'Configurar Cuidador'
+            },
+            basicInfo: 'Información Básica',
+            name: 'Nombre',
+            email: 'Correo',
+            type: 'Tipo',
+            location: 'Ubicación',
+            noBio: 'Sin biografía configurada',
+            editProfile: 'Editar Perfil',
+            success: 'Perfil actualizado exitosamente',
+            error: 'Error al actualizar el perfil'
+        },
+        becomeSitter: {
+            title: 'Conviértete en Cuidador',
+            subtitle: 'Gana dinero haciendo lo que amas',
+            cta: 'Empezar ahora'
         }
     },
     en: {
@@ -281,6 +352,77 @@ export const dictionary = {
             selectService: 'Select Service',
             requestBooking: 'REQUEST BOOKING',
             guarantee: 'Book via PetCare to enjoy Premium Insurance, 24/7 support, and secure payment guarantee.'
+        },
+        auth: {
+            login: {
+                title: 'Welcome Back',
+                subtitle: 'Log in to continue',
+                email: 'Email Address',
+                password: 'Password',
+                rememberMe: 'Remember me',
+                forgotPassword: 'Forgot your password?',
+                submit: 'Log In',
+                submitting: 'Logging in...',
+                or: 'or',
+                google: 'Continue with Google',
+                facebook: 'Continue with Facebook',
+                noAccount: "Don't have an account?",
+                signup: 'Sign up for free',
+                error: 'Login failed'
+            },
+            signup: {
+                title: 'Create your account',
+                subtitle: 'Join our community of pet lovers',
+                name: 'Full Name',
+                email: 'Email Address',
+                password: 'Password',
+                passwordHint: 'Minimum 8 characters',
+                country: 'Country',
+                countryPlaceholder: 'Select your country',
+                province: 'Province',
+                canton: 'Canton',
+                userType: 'I want to register as',
+                types: {
+                    owner: 'Pet Owner',
+                    sitter: 'Sitter',
+                    both: 'Both'
+                },
+                terms: 'I accept the {terms} and {privacy}',
+                termsLink: 'Terms and Conditions',
+                privacyLink: 'Privacy Policy',
+                submit: 'Create Account',
+                submitting: 'Creating account...',
+                success: 'Account created successfully! You can now log in.',
+                error: 'Error creating account',
+                or: 'or',
+                google: 'Continue with Google',
+                facebook: 'Continue with Facebook',
+                hasAccount: 'Already have an account?',
+                login: 'Log in'
+            }
+        },
+        profile: {
+            title: 'Profile',
+            subtitle: 'Manage your account and set your preferences',
+            tabs: {
+                view: 'View Profile',
+                edit: 'Edit Data',
+                sitter: 'Sitter Settings'
+            },
+            basicInfo: 'Basic Information',
+            name: 'Name',
+            email: 'Email',
+            type: 'Type',
+            location: 'Location',
+            noBio: 'No bio configured',
+            editProfile: 'Edit Profile',
+            success: 'Profile updated successfully',
+            error: 'Error updating profile'
+        },
+        becomeSitter: {
+            title: 'Become a Sitter',
+            subtitle: 'Earn money doing what you love',
+            cta: 'Get started'
         }
     },
     pt: {
@@ -377,7 +519,7 @@ export const dictionary = {
             profile: 'Perfil',
             verified: 'Verificado',
             reviews: 'avaliações',
-            completedBookings: 'Reservas Conclídas',
+            completedBookings: 'Reservas Concluídas',
             repeatCustomers: 'Clientes Recorrentes',
             bookingsMonth: 'Reservas este mês',
             about: 'Sobre',
@@ -423,6 +565,77 @@ export const dictionary = {
             selectService: 'Selecionar Serviço',
             requestBooking: 'SOLICITAR RESERVA',
             guarantee: 'Reserve via PetCare para desfrutar de Seguro Premium, suporte 24/7 e garantia de pagamento seguro.'
+        },
+        auth: {
+            login: {
+                title: 'Bem-vindo de volta',
+                subtitle: 'Faça login para continuar',
+                email: 'Endereço de E-mail',
+                password: 'Senha',
+                rememberMe: 'Lembrar-me',
+                forgotPassword: 'Esqueceu sua senha?',
+                submit: 'Entrar',
+                submitting: 'Entrando...',
+                or: 'ou',
+                google: 'Continuar com Google',
+                facebook: 'Continuar com Facebook',
+                noAccount: 'Não tem uma conta?',
+                signup: 'Cadastre-se grátis',
+                error: 'Falha ao entrar'
+            },
+            signup: {
+                title: 'Crie sua conta',
+                subtitle: 'Junte-se à nossa comunidade de amantes de animais',
+                name: 'Nome Completo',
+                email: 'Endereço de E-mail',
+                password: 'Senha',
+                passwordHint: 'Mínimo de 8 caracteres',
+                country: 'País',
+                countryPlaceholder: 'Selecione seu país',
+                province: 'Província',
+                canton: 'Cantão',
+                userType: 'Quero me registrar como',
+                types: {
+                    owner: 'Dono de Animal',
+                    sitter: 'Cuidador',
+                    both: 'Ambos'
+                },
+                terms: 'Eu aceito os {terms} e a {privacy}',
+                termsLink: 'Termos e Condições',
+                privacyLink: 'Política de Privacidade',
+                submit: 'Criar Conta',
+                submitting: 'Criando conta...',
+                success: 'Conta criada com sucesso! Você já pode fazer login.',
+                error: 'Erro ao criar conta',
+                or: 'ou',
+                google: 'Continuar com Google',
+                facebook: 'Continuar com Facebook',
+                hasAccount: 'Já tem uma conta?',
+                login: 'Entrar'
+            }
+        },
+        profile: {
+            title: 'Perfil',
+            subtitle: 'Gerencie sua conta e configure suas preferências',
+            tabs: {
+                view: 'Ver Perfil',
+                edit: 'Editar Dados',
+                sitter: 'Configurar Cuidador'
+            },
+            basicInfo: 'Informação Básica',
+            name: 'Nome',
+            email: 'E-mail',
+            type: 'Tipo',
+            location: 'Localização',
+            noBio: 'Sem biografia configurada',
+            editProfile: 'Editar Perfil',
+            success: 'Perfil atualizado com sucesso',
+            error: 'Erro ao atualizar o perfil'
+        },
+        becomeSitter: {
+            title: 'Torne-se um Cuidador',
+            subtitle: 'Ganhe dinheiro fazendo o que ama',
+            cta: 'Começar agora'
         }
     },
     fr: {
@@ -565,6 +778,77 @@ export const dictionary = {
             selectService: 'Choisir un Service',
             requestBooking: 'DEMANDER UNE RÉSERVATION',
             guarantee: 'Réservez via PetCare pour bénéficier de l\'Assurance Premium, d\'un support 24/7 et d\'une garantie de paiement sécurisé.'
+        },
+        auth: {
+            login: {
+                title: 'Bon retour',
+                subtitle: 'Connectez-vous pour continuer',
+                email: 'Adresse E-mail',
+                password: 'Mot de passe',
+                rememberMe: 'Se souvenir de moi',
+                forgotPassword: 'Mot de passe oublié ?',
+                submit: 'Se connecter',
+                submitting: 'Connexion en cours...',
+                or: 'ou',
+                google: 'Continuer avec Google',
+                facebook: 'Continuer avec Facebook',
+                noAccount: "Vous n'avez pas de compte ?",
+                signup: 'Inscrivez-vous gratuitement',
+                error: 'Échec de la connexion'
+            },
+            signup: {
+                title: 'Créez votre compte',
+                subtitle: 'Rejoignez notre communauté de passionnés d\'animaux',
+                name: 'Nom Complet',
+                email: 'Adresse E-mail',
+                password: 'Mot de passe',
+                passwordHint: 'Minimum 8 caractères',
+                country: 'Pays',
+                countryPlaceholder: 'Sélectionnez votre pays',
+                province: 'Province',
+                canton: 'Canton',
+                userType: 'Je souhaite m\'inscrire en tant que',
+                types: {
+                    owner: 'Propriétaire d\'animal',
+                    sitter: 'Gardien',
+                    both: 'Les deux'
+                },
+                terms: 'J\'accepte les {terms} et la {privacy}',
+                termsLink: 'Conditions Générales',
+                privacyLink: 'Politique de Confidentialité',
+                submit: 'Créer un compte',
+                submitting: 'Création du compte...',
+                success: 'Compte créé avec succès ! Vous pouvez maintenant vous connecter.',
+                error: 'Erreur lors de la création du compte',
+                or: 'ou',
+                google: 'Continuer avec Google',
+                facebook: 'Continuer avec Facebook',
+                hasAccount: 'Vous avez déjà un compte ?',
+                login: 'Se connecter'
+            }
+        },
+        profile: {
+            title: 'Profil',
+            subtitle: 'Gérez votre compte et définissez vos préférences',
+            tabs: {
+                view: 'Voir Profil',
+                edit: 'Modifier Données',
+                sitter: 'Paramètres Gardien'
+            },
+            basicInfo: 'Informations de Base',
+            name: 'Nom',
+            email: 'E-mail',
+            type: 'Type',
+            location: 'Localisation',
+            noBio: 'Aucune bio configurée',
+            editProfile: 'Modifier le profil',
+            success: 'Profil mis à jour avec succès',
+            error: 'Erreur lors de la mise à jour du profil'
+        },
+        becomeSitter: {
+            title: 'Devenez Gardien',
+            subtitle: 'Gagnez de l\'argent en faisant ce que vous aimez',
+            cta: 'Commencer maintenant'
         }
     }
 };
