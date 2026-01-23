@@ -111,10 +111,10 @@ export default function Home() {
             textAlign: 'center'
           }}>
             {[
-              { number: '10k+', label: 'Mascotas Felices' },
-              { number: '500+', label: 'Cuidadores Verificados' },
-              { number: '4.9/5', label: 'Calificación Promedio' },
-              { number: '24/7', label: 'Soporte Dedicado' },
+              { number: '10k+', label: t('home.stats.happyPets') },
+              { number: '500+', label: t('home.stats.verifiedSitters') },
+              { number: '4.9/5', label: t('home.stats.averageRating') },
+              { number: '24/7', label: t('home.stats.dedicatedSupport') },
             ].map((stat, i) => (
               <div key={i}>
                 <div style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--text-main)' }}>{stat.number}</div>
@@ -129,16 +129,16 @@ export default function Home() {
       <section style={{ padding: '6rem 0', backgroundColor: '#F9FAFB' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1rem' }}>Servicios para cada necesidad</h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem' }}>Personaliza el cuidado que tu mascota merece.</p>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1rem' }}>{t('home.services.title')}</h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.125rem' }}>{t('home.services.subtitle')}</p>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
             {[
-              { title: 'Alojamiento', icon: '🏠', desc: 'Tu mascota se queda en casa del cuidador. Un ambiente hogareño y seguro.', badge: 'Popular' },
-              { title: 'Guardería de Día', icon: '☀️', desc: 'Cuidados durante el día para que tu mascota no se quede sola mientras trabajas.' },
-              { title: 'Paseos', icon: '🦮', desc: 'Caminatas personalizadas, ejercicio y diversión en su vecindario.' },
-              { title: 'Visitas a Domicilio', icon: '🐱', desc: 'Alimentación, juegos y mimos en la comodidad de tu propia casa.' },
+              { title: t('home.services.boarding'), icon: '🏠', desc: t('home.services.boardingDesc'), badge: t('home.services.popular') },
+              { title: t('home.services.daycare'), icon: '☀️', desc: t('home.services.daycareDesc') },
+              { title: t('home.services.walking'), icon: '🦮', desc: t('home.services.walkingDesc') },
+              { title: t('home.services.visits'), icon: '🐱', desc: t('home.services.visitsDesc') },
             ].map((service, i) => (
               <Card key={i} hoverEffect>
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{service.icon}</div>
@@ -218,9 +218,9 @@ export default function Home() {
             boxShadow: 'var(--shadow-lg)',
             backgroundImage: 'linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%)'
           }}>
-            <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1rem' }}>¿Listo para empezar?</h2>
+            <h2 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '1rem' }}>{t('home.cta.title')}</h2>
             <p style={{ fontSize: '1.25rem', opacity: 0.9, marginBottom: '2.5rem', maxWidth: '600px', marginInline: 'auto' }}>
-              Únete a nuestra comunidad hoy mismo.
+              {t('home.cta.subtitle')}
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/signup">

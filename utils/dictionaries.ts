@@ -20,42 +20,30 @@ export const dictionary = {
             step2Title: 'Reserva',
             step2Desc: 'Contacta y reserva el servicio perfecto para tu mascota.',
             step3Title: 'Relájate',
-            step3Desc: 'Disfruta de tu tiempo mientras tu mascota recibe el mejor cuidado.'
-        },
-        auth: {
-            loginTitle: 'Iniciar Sesión',
-            emailLabel: 'Correo Electrónico',
-            passwordLabel: 'Contraseña',
-            submitLogin: 'Ingresar',
-            noAccount: '¿No tienes cuenta?',
-            registerHere: 'Regístrate aquí',
-            registerTitle: 'Crear Cuenta',
-            nameLabel: 'Nombre Completo',
-            confirmPasswordLabel: 'Confirmar Contraseña',
-            submitRegister: 'Registrarse',
-            alreadyAccount: '¿Ya tienes cuenta?',
-            loginHere: 'Inicia sesión aquí'
-        },
-        profile: {
-            title: 'Mi Perfil',
-            subtitle: 'Gestiona tu información personal y ubicación',
-            tabs: {
-                view: 'Ver Perfil',
-                edit: 'Editar Datos',
-                sitter: 'Info Cuidador'
+            step3Desc: 'Disfruta de tu tiempo mientras tu mascota recibe el mejor cuidado.',
+            stats: {
+                happyPets: 'Mascotas Felices',
+                verifiedSitters: 'Cuidadores Verificados',
+                averageRating: 'Calificación Promedio',
+                dedicatedSupport: 'Soporte Dedicado'
             },
-            basicInfo: 'Información Básica',
-            name: 'Nombre',
-            email: 'Email',
-            type: 'Tipo',
-            location: 'Ubicación',
-            sitterProfile: 'Perfil de Cuidador',
-            noBio: 'No has escrito una biografía aún.',
-            editProfile: 'Editar Perfil',
-            saveChanges: 'Guardar Cambios',
-            saving: 'Guardando...',
-            success: '¡Perfil actualizado con éxito!',
-            error: 'Error al actualizar el perfil'
+            services: {
+                title: 'Servicios para cada necesidad',
+                subtitle: 'Personaliza el cuidado que tu mascota merece.',
+                boarding: 'Alojamiento',
+                boardingDesc: 'Tu mascota se queda en casa del cuidador. Un ambiente hogareño y seguro.',
+                daycare: 'Guardería de Día',
+                daycareDesc: 'Cuidados durante el día para que tu mascota no se quede sola mientras trabajas.',
+                walking: 'Paseos',
+                walkingDesc: 'Caminatas personalizadas, ejercicio y diversión en su vecindario.',
+                visits: 'Visitas a Domicilio',
+                visitsDesc: 'Alimentación, juegos y mimos en la comodidad de tu propia casa.',
+                popular: 'Popular'
+            },
+            cta: {
+                title: '¿Listo para empezar?',
+                subtitle: 'Únete a nuestra comunidad hoy mismo.'
+            }
         },
         search: {
             title: 'Encuentra al cuidador perfecto',
@@ -65,14 +53,41 @@ export const dictionary = {
             error: 'Error al cargar cuidadores',
             emptyTitle: 'No hay cuidadores disponibles',
             emptyDesc: 'Intenta ajustar tus filtros o vuelve más tarde.',
-            loadMore: 'Cargar más resultados'
+            loadMore: 'Cargar más resultados',
+            filters: {
+                title: 'Filtros',
+                serviceType: 'Tipo de Servicio',
+                priceRange: 'Precio / Noche',
+                sortBy: 'Ordenar por',
+                apply: 'Aplicar Filtros',
+                sortOptions: {
+                    recommended: 'Recomendados',
+                    priceLow: 'Precio: Menor a Mayor',
+                    priceHigh: 'Precio: Mayor a Menor',
+                    rating: 'Mejor Calificación'
+                }
+            }
+        },
+        footer: {
+            desc: 'Conectando dueños amorosos con cuidadores de confianza en todo Costa Rica.',
+            discover: 'Descubrir',
+            community: 'Comunidad',
+            searchSitters: 'Buscar Cuidadores',
+            walkingServices: 'Servicios de Paseo',
+            boarding: 'Alojamiento',
+            becomeSitter: 'Conviértete en Cuidador',
+            blog: 'Blog',
+            reviews: 'Reseñas',
+            rights: 'Todos los derechos reservados.'
         },
         common: {
             loading: 'Cargando...',
             error: 'Ocurrió un error',
             owner: 'Dueño de Mascota',
             sitter: 'Cuidador',
-            both: 'Ambos'
+            both: 'Ambos',
+            viewProfile: 'Ver Perfil',
+            from: 'Desde'
         },
         sitter: {
             profile: 'Perfil',
@@ -147,42 +162,30 @@ export const dictionary = {
             step2Title: 'Book',
             step2Desc: 'Contact and book the perfect service for your pet.',
             step3Title: 'Relax',
-            step3Desc: 'Enjoy your time while your pet receives the best care.'
-        },
-        auth: {
-            loginTitle: 'Log In',
-            emailLabel: 'Email Address',
-            passwordLabel: 'Password',
-            submitLogin: 'Log In',
-            noAccount: 'Don\'t have an account?',
-            registerHere: 'Register here',
-            registerTitle: 'Create Account',
-            nameLabel: 'Full Name',
-            confirmPasswordLabel: 'Confirm Password',
-            submitRegister: 'Sign Up',
-            alreadyAccount: 'Already have an account?',
-            loginHere: 'Log in here'
-        },
-        profile: {
-            title: 'My Profile',
-            subtitle: 'Manage your personal information and location',
-            tabs: {
-                view: 'View Profile',
-                edit: 'Edit Details',
-                sitter: 'Sitter Info'
+            step3Desc: 'Enjoy your time while your pet receives the best care.',
+            stats: {
+                happyPets: 'Happy Pets',
+                verifiedSitters: 'Verified Sitters',
+                averageRating: 'Average Rating',
+                dedicatedSupport: 'Dedicated Support'
             },
-            basicInfo: 'Basic Information',
-            name: 'Name',
-            email: 'Email',
-            type: 'Type',
-            location: 'Location',
-            sitterProfile: 'Sitter Profile',
-            noBio: 'You haven\'t written a bio yet.',
-            editProfile: 'Edit Profile',
-            saveChanges: 'Save Changes',
-            saving: 'Saving...',
-            success: 'Profile updated successfully!',
-            error: 'Error updating profile'
+            services: {
+                title: 'Services for every need',
+                subtitle: 'Customize the care your pet deserves.',
+                boarding: 'Boarding',
+                boardingDesc: 'Your pet stays at the sitter\'s home. A homey and safe environment.',
+                daycare: 'Daycare',
+                daycareDesc: 'Care during the day so your pet isn\'t alone while you work.',
+                walking: 'Walking',
+                walkingDesc: 'Personalized walks, exercise, and fun in your neighborhood.',
+                visits: 'House Visits',
+                visitsDesc: 'Feeding, games, and cuddles in the comfort of your own home.',
+                popular: 'Popular'
+            },
+            cta: {
+                title: 'Ready to start?',
+                subtitle: 'Join our community today.'
+            }
         },
         search: {
             title: 'Find the perfect sitter',
@@ -192,14 +195,41 @@ export const dictionary = {
             error: 'Error loading sitters',
             emptyTitle: 'No sitters available',
             emptyDesc: 'Try adjusting your filters or check back later.',
-            loadMore: 'Load more results'
+            loadMore: 'Load more results',
+            filters: {
+                title: 'Filters',
+                serviceType: 'Service Type',
+                priceRange: 'Price / Night',
+                sortBy: 'Sort By',
+                apply: 'Apply Filters',
+                sortOptions: {
+                    recommended: 'Recommended',
+                    priceLow: 'Price: Low to High',
+                    priceHigh: 'Price: High to Low',
+                    rating: 'Best Rating'
+                }
+            }
+        },
+        footer: {
+            desc: 'Connecting loving owners with trusted sitters across Costa Rica.',
+            discover: 'Discover',
+            community: 'Community',
+            searchSitters: 'Search Sitters',
+            walkingServices: 'Walking Services',
+            boarding: 'Boarding',
+            becomeSitter: 'Become a Sitter',
+            blog: 'Blog',
+            reviews: 'Reviews',
+            rights: 'All rights reserved.'
         },
         common: {
             loading: 'Loading...',
             error: 'An error occurred',
             owner: 'Pet Owner',
             sitter: 'Sitter',
-            both: 'Both'
+            both: 'Both',
+            viewProfile: 'View Profile',
+            from: 'From'
         },
         sitter: {
             profile: 'Profile',
@@ -274,42 +304,30 @@ export const dictionary = {
             step2Title: 'Reserve',
             step2Desc: 'Entre em contato e reserve o serviço perfeito para seu pet.',
             step3Title: 'Relaxe',
-            step3Desc: 'Aproveite seu tempo enquanto seu pet recebe o melhor cuidado.'
-        },
-        auth: {
-            loginTitle: 'Entrar',
-            emailLabel: 'Endereço de E-mail',
-            passwordLabel: 'Senha',
-            submitLogin: 'Entrar',
-            noAccount: 'Não tem uma conta?',
-            registerHere: 'Cadastre-se aqui',
-            registerTitle: 'Criar Conta',
-            nameLabel: 'Nome Completo',
-            confirmPasswordLabel: 'Confirmar Senha',
-            submitRegister: 'Cadastre-se',
-            alreadyAccount: 'Já tem uma conta?',
-            loginHere: 'Entre aqui'
-        },
-        profile: {
-            title: 'Meu Perfil',
-            subtitle: 'Gerencie suas informações pessoais e localização',
-            tabs: {
-                view: 'Ver Perfil',
-                edit: 'Editar Detalhes',
-                sitter: 'Info do Cuidador'
+            step3Desc: 'Aproveite seu tempo enquanto seu pet recebe o melhor cuidado.',
+            stats: {
+                happyPets: 'Pets Felizes',
+                verifiedSitters: 'Cuidadores Verificados',
+                averageRating: 'Avaliação Média',
+                dedicatedSupport: 'Suporte Dedicado'
             },
-            basicInfo: 'Informações Básicas',
-            name: 'Nome',
-            email: 'E-mail',
-            type: 'Tipo',
-            location: 'Localização',
-            sitterProfile: 'Perfil do Cuidador',
-            noBio: 'Você ainda não escreveu uma biografia.',
-            editProfile: 'Editar Perfil',
-            saveChanges: 'Salvar Alterações',
-            saving: 'Salvando...',
-            success: 'Perfil atualizado com sucesso!',
-            error: 'Erro ao atualizar perfil'
+            services: {
+                title: 'Serviços para cada necessidade',
+                subtitle: 'Personalize o cuidado que seu pet merece.',
+                boarding: 'Hospedagem',
+                boardingDesc: 'Seu pet fica na casa do cuidador. Um ambiente caseiro e seguro.',
+                daycare: 'Creche',
+                daycareDesc: 'Cuidados durante o dia para que seu pet não fique sozinho enquanto você trabalha.',
+                walking: 'Passeios',
+                walkingDesc: 'Caminhadas personalizadas, exercício e diversão em sua vizinhança.',
+                visits: 'Visitas Domiciliares',
+                visitsDesc: 'Alimentação, brincadeiras e carinho no conforto da sua própria casa.',
+                popular: 'Popular'
+            },
+            cta: {
+                title: 'Pronto para começar?',
+                subtitle: 'Junte-se à nossa comunidade hoje mesmo.'
+            }
         },
         search: {
             title: 'Encontre o cuidador perfeito',
@@ -319,20 +337,47 @@ export const dictionary = {
             error: 'Erro ao carregar cuidadores',
             emptyTitle: 'Nenhum cuidador disponível',
             emptyDesc: 'Tente ajustar seus filtros ou volte mais tarde.',
-            loadMore: 'Carregar mais resultados'
+            loadMore: 'Carregar mais resultados',
+            filters: {
+                title: 'Filtros',
+                serviceType: 'Tipo de Serviço',
+                priceRange: 'Preço / Noite',
+                sortBy: 'Ordenar por',
+                apply: 'Aplicar Filtros',
+                sortOptions: {
+                    recommended: 'Recomendados',
+                    priceLow: 'Preço: Menor para Maior',
+                    priceHigh: 'Preço: Maior para Menor',
+                    rating: 'Melhor Avaliação'
+                }
+            }
+        },
+        footer: {
+            desc: 'Conectando donos amorosos com cuidadores de confiança em toda a Costa Rica.',
+            discover: 'Descobrir',
+            community: 'Comunidade',
+            searchSitters: 'Buscar Cuidadores',
+            walkingServices: 'Serviços de Passeio',
+            boarding: 'Hospedagem',
+            becomeSitter: 'Torne-se um Cuidador',
+            blog: 'Blog',
+            reviews: 'Avaliações',
+            rights: 'Todos os direitos reservados.'
         },
         common: {
             loading: 'Carregando...',
             error: 'Ocorreu um erro',
             owner: 'Dono de Pet',
             sitter: 'Cuidador',
-            both: 'Ambos'
+            both: 'Ambos',
+            viewProfile: 'Ver Perfil',
+            from: 'A partir de'
         },
         sitter: {
             profile: 'Perfil',
             verified: 'Verificado',
             reviews: 'avaliações',
-            completedBookings: 'Reservas Concluídas',
+            completedBookings: 'Reservas Conclídas',
             repeatCustomers: 'Clientes Recorrentes',
             bookingsMonth: 'Reservas este mês',
             about: 'Sobre',
@@ -352,7 +397,7 @@ export const dictionary = {
             locationTitle: 'Localização',
             locationDesc: 'A localização exata será compartilhada após a reserva.',
             serviceArea: 'Área de Serviço',
-            servicesPricing: 'Serviços e Precios',
+            servicesPricing: 'Serviços e Preços',
             boarding: '🏠 Hospedagem',
             walking: '🦮 Passeio',
             daycare: '☀️ Creche',
@@ -401,66 +446,81 @@ export const dictionary = {
             step2Title: 'Réserver',
             step2Desc: 'Contactez et réservez le service parfait pour votre animal.',
             step3Title: 'Détendez-vous',
-            step3Desc: 'Profitez de votre temps pendant que votre animal reçoit les meilleurs soins.'
-        },
-        auth: {
-            loginTitle: 'Connexion',
-            emailLabel: 'Adresse E-mail',
-            passwordLabel: 'Mot de passe',
-            submitLogin: 'Connexion',
-            noAccount: 'Pas encore de compte ?',
-            registerHere: 'Inscrivez-vous ici',
-            registerTitle: 'Créer un Compte',
-            nameLabel: 'Nom Complet',
-            confirmPasswordLabel: 'Confirmer Mot de passe',
-            submitRegister: 'S\'inscrire',
-            alreadyAccount: 'Déjà un compte ?',
-            loginHere: 'Connectez-vous ici'
-        },
-        profile: {
-            title: 'Mon Profil',
-            subtitle: 'Gérez vos informations personnelles et votre localisation',
-            tabs: {
-                view: 'Voir Profil',
-                edit: 'Modifier Détails',
-                sitter: 'Info Gardien'
+            step3Desc: 'Profitez de votre temps pendant que votre animal reçoit les meilleurs soins.',
+            stats: {
+                happyPets: 'Animaux Heureux',
+                verifiedSitters: 'Gardiens Vérifiés',
+                averageRating: 'Note Moyenne',
+                dedicatedSupport: 'Support Dédié'
             },
-            basicInfo: 'Informations de Base',
-            name: 'Nom',
-            email: 'E-mail',
-            type: 'Type',
-            location: 'Localisation',
-            sitterProfile: 'Profil Gardien',
-            noBio: 'Vous n\'avez pas encore écrit de biographie.',
-            editProfile: 'Modifier Profil',
-            saveChanges: 'Enregistrer Modifications',
-            saving: 'Enregistrement...',
-            success: 'Profil mis à jour avec succès !',
-            error: 'Erreur lors de la mise à jour du profil'
+            services: {
+                title: 'Des services pour chaque besoin',
+                subtitle: 'Personnalisez les soins que votre animal mérite.',
+                boarding: 'Hébergement',
+                boardingDesc: 'Votre animal reste chez le gardien. Un environnement familial et sûr.',
+                daycare: 'Garderie de Jour',
+                daycareDesc: 'Soins pendant la journée pour que votre animal ne soit pas seul quand vous travaillez.',
+                walking: 'Promenades',
+                walkingDesc: 'Promenades personnalisées, exercice et divertissement dans votre quartier.',
+                visits: 'Visites à Domicile',
+                visitsDesc: 'Alimentation, jeux et câlins dans le confort de votre propre maison.',
+                popular: 'Populaire'
+            },
+            cta: {
+                title: 'Prêt à commencer ?',
+                subtitle: 'Rejoignez notre communauté dès aujourd\'hui.'
+            }
         },
         search: {
             title: 'Trouvez le gardien parfait',
-            subtitle: 'Plus de 500 gardiens vérifiés dans votre région prêts à vous aider.',
+            subtitle: 'Plus de 500 gardiens vérificados dans votre région prêts à vous aider.',
             results: 'résultats trouvés',
             loading: 'Chargement des gardiens...',
             error: 'Erreur lors du chargement des gardiens',
             emptyTitle: 'Aucun gardien disponible',
             emptyDesc: 'Essayez d\'ajuster vos filtres ou revenez plus tard.',
-            loadMore: 'Charger plus de résultats'
+            loadMore: 'Charger plus de résultats',
+            filters: {
+                title: 'Filtres',
+                serviceType: 'Type de Service',
+                priceRange: 'Prix / Nuit',
+                sortBy: 'Trier par',
+                apply: 'Appliquer Filtres',
+                sortOptions: {
+                    recommended: 'Recommandés',
+                    priceLow: 'Prix : Croissant',
+                    priceHigh: 'Prix : Décroissant',
+                    rating: 'Meilleure Note'
+                }
+            }
+        },
+        footer: {
+            desc: 'Connecter des propriétaires aimants avec des gardiens de confiance dans tout le Costa Rica.',
+            discover: 'Découvrir',
+            community: 'Communauté',
+            searchSitters: 'Trouver des Gardiens',
+            walkingServices: 'Services de Promenade',
+            boarding: 'Hébergement',
+            becomeSitter: 'Devenir Gardien',
+            blog: 'Blog',
+            reviews: 'Avis',
+            rights: 'Tous droits réservés.'
         },
         common: {
             loading: 'Chargement...',
             error: 'Une erreur est survenue',
             owner: 'Propriétaire',
             sitter: 'Gardien',
-            both: 'Les deux'
+            both: 'Les deux',
+            viewProfile: 'Voir Profil',
+            from: 'À partir de'
         },
         sitter: {
             profile: 'Profil',
             verified: 'Vérifié',
             reviews: 'avis',
-            completedBookings: 'Réservations terminées',
-            repeatCustomers: 'Clients réguliers',
+            completedBookings: 'Réservations Terminées',
+            repeatCustomers: 'Clients Réguliers',
             bookingsMonth: 'Réservations ce mois-ci',
             about: 'À propos',
             personalInfo: 'Informations Personnelles',
@@ -483,7 +543,7 @@ export const dictionary = {
             boarding: '🏠 Hébergement',
             walking: '🦮 Promenade',
             daycare: '☀️ Garderie',
-            visits: '🐱 Visites',
+            visits: '🐱 Visitas',
             taxi: '🚗 Pet Taxi',
             grooming: '✂️ Toilettage',
             training: '🎓 Dressage',
