@@ -7,7 +7,7 @@ export const maxDuration = 30;
 export async function POST(req: Request) {
     const { messages } = await req.json();
 
-    const result = streamText({
+    const result = await streamText({
         model: google('gemini-1.5-flash'),
         messages,
         system: `Eres un asistente de IA experto para PetCare, una plataforma que conecta dueños de mascotas con cuidadores confiables en Costa Rica y Latinoamérica.

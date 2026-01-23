@@ -4,11 +4,13 @@ import { useChat } from 'ai/react';
 import { useState, useRef, useEffect } from 'react';
 import { Button } from './Button';
 import { Card } from './Card';
+import { useLanguage } from '@/context/LanguageContext';
 
 export function ChatBot() {
     const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat();
     const [isOpen, setIsOpen] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const { t } = useLanguage();
 
     // Auto-scroll to bottom
     useEffect(() => {
@@ -73,7 +75,7 @@ export function ChatBot() {
                     >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <span style={{ fontSize: '1.2rem' }}>🐾</span>
-                            <span style={{ fontWeight: 600 }}>PetCare Assistant</span>
+                            <span style={{ fontWeight: 600 }}>{t('chatbot.title')}</span>
                         </div>
                         <button
                             onClick={() => setIsOpen(false)}
@@ -99,7 +101,7 @@ export function ChatBot() {
                         {messages.length === 0 && (
                             <div style={{ textAlign: 'center', color: 'var(--text-light)', marginTop: '2rem' }}>
                                 <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>👋</div>
-                                <p>¡Hola! Soy tu asistente de PetCare. ¿En qué puedo ayudarte hoy?</p>
+                                <p>{t('chatbot.welcome')}</p>
                             </div>
                         )}
                         {messages.map((m: any) => (
@@ -123,7 +125,7 @@ export function ChatBot() {
                         ))}
                         {isLoading && (
                             <div style={{ alignSelf: 'flex-start', color: 'var(--text-light)', fontSize: '0.8rem' }}>
-                                Escribiendo...
+                                {t('chatbot.typing')}
                             </div>
                         )}
                     </div>
@@ -142,7 +144,7 @@ export function ChatBot() {
                         <input
                             value={input}
                             onChange={handleInputChange}
-                            placeholder="Escribe un mensaje..."
+                            placeholder={t('chatbot.placeholder')}
                             style={{
                                 flex: 1,
                                 padding: '0.5rem 0.75rem',

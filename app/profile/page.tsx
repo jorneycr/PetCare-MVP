@@ -64,10 +64,10 @@ export default function ProfilePage() {
                     services: data.sitter?.services || [],
                 });
             } else {
-                setError(data.error || 'Error al cargar el perfil');
+                setError(data.error || t('profile.error'));
             }
         } catch (err) {
-            setError('Error de conexión');
+            setError(t('common.error'));
         } finally {
             setLoading(false);
         }
@@ -221,7 +221,7 @@ export default function ProfilePage() {
                                     <span style={{ fontWeight: 600 }}>{t('profile.email')}:</span> <span>{formData.email}</span>
                                     {formData.country && (
                                         <>
-                                            <span style={{ fontWeight: 600 }}>País:</span> <span>{formData.country}</span>
+                                            <span style={{ fontWeight: 600 }}>{t('auth.signup.country')}:</span> <span>{formData.country}</span>
                                         </>
                                     )}
                                     <span style={{ fontWeight: 600 }}>{t('profile.type')}:</span> <span style={{ textTransform: 'capitalize' }}>{formData.userType === 'owner' ? t('common.owner') : formData.userType === 'sitter' ? t('common.sitter') : t('common.both')}</span>
@@ -232,42 +232,49 @@ export default function ProfilePage() {
                             {(formData.userType === 'sitter' || formData.userType === 'both') && (
                                 <>
                                     <div style={{ padding: '1.5rem', background: '#F9FAFB', borderRadius: 'var(--radius-lg)' }}>
-                                        <h3 style={{ marginBottom: '1rem', color: 'var(--text-main)', borderBottom: '1px solid #E5E7EB', paddingBottom: '0.5rem' }}>Sobre {formData.name.split(' ')[0]}</h3>
+                                        <h3 style={{ marginBottom: '1rem', color: 'var(--text-main)', borderBottom: '1px solid #E5E7EB', paddingBottom: '0.5rem' }}>{t('sitter.about')} {formData.name.split(' ')[0]}</h3>
                                         <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontStyle: formData.bio ? 'normal' : 'italic', whiteSpace: 'pre-wrap' }}>
                                             {formData.bio || t('profile.noBio')}
                                         </p>
 
                                         <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                                             <div>
-                                                <h4 style={{ fontSize: '0.8rem', color: 'var(--text-light)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Información Personal</h4>
+                                                <h4 style={{ fontSize: '0.8rem', color: 'var(--text-light)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{t('sitter.personalInfo')}</h4>
                                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', fontSize: '0.85rem' }}>
-                                                    <div>🎂 <strong>Edad:</strong> {formData.age || '--'} años</div>
-                                                    <div>⭐ <strong>Experiencia:</strong> {formData.experienceYears || '--'} años</div>
-                                                    <div>🐾 <strong>Mascotas propias:</strong> {formData.ownPets || 'Ninguna'}</div>
+                                                    <div>🎂 <strong>{t('sitter.age')}:</strong> {formData.age || '--'} {t('common.years')}</div>
+                                                    <div>⭐ <strong>{t('sitter.experience')}:</strong> {formData.experienceYears || '--'} {t('common.years')}</div>
+                                                    <div>🐾 <strong>{t('sitter.ownPets')}:</strong> {formData.ownPets || t('common.none')}</div>
                                                 </div>
                                             </div>
                                             <div>
-                                                <h4 style={{ fontSize: '0.8rem', color: 'var(--text-light)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Habilidades</h4>
+                                                <h4 style={{ fontSize: '0.8rem', color: 'var(--text-light)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>{t('sitter.skills')}</h4>
                                                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                                                     {formData.skills ? formData.skills.split(',').map((skill, i) => (
                                                         <span key={i} style={{ padding: '0.2rem 0.5rem', background: '#EFF6FF', color: 'var(--primary)', borderRadius: 'var(--radius-sm)', fontSize: '0.75rem', fontWeight: 500 }}>
                                                             {skill.trim()}
                                                         </span>
-                                                    )) : <span style={{ fontSize: '0.8rem', color: 'var(--text-light)', fontStyle: 'italic' }}>Sin habilidades</span>}
+                                                    )) : <span style={{ fontSize: '0.8rem', color: 'var(--text-light)', fontStyle: 'italic' }}>{t('sitter.noSkills')}</span>}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div style={{ padding: '1.5rem', background: '#F9FAFB', borderRadius: 'var(--radius-lg)' }}>
-                                        <h3 style={{ marginBottom: '1rem', color: 'var(--text-main)', borderBottom: '1px solid #E5E7EB', paddingBottom: '0.5rem' }}>Servicios y Precios</h3>
+                                        <h3 style={{ marginBottom: '1rem', color: 'var(--text-main)', borderBottom: '1px solid #E5E7EB', paddingBottom: '0.5rem' }}>{t('sitter.servicesPricing')}</h3>
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                             {formData.services && formData.services.length > 0 ? formData.services.map((s, i) => (
                                                 <div key={i} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem', borderBottom: '1px solid #F3F4F6' }}>
-                                                    <span style={{ textTransform: 'capitalize', fontSize: '0.9rem' }}>{s.type}</span>
+                                                    <span style={{ textTransform: 'capitalize', fontSize: '0.9rem' }}>
+                                                        {s.type === 'boarding' ? t('sitter.boarding') :
+                                                            s.type === 'walking' ? t('sitter.walking') :
+                                                                s.type === 'daycare' ? t('sitter.daycare') :
+                                                                    s.type === 'taxi' ? t('sitter.taxi') :
+                                                                        s.type === 'grooming' ? t('sitter.grooming') :
+                                                                            s.type === 'training' ? t('sitter.training') : t('sitter.visits')}
+                                                    </span>
                                                     <span style={{ fontWeight: 600 }}>₡{s.price.toLocaleString()}</span>
                                                 </div>
-                                            )) : <p style={{ fontSize: '0.8rem', color: 'var(--text-light)', fontStyle: 'italic' }}>No hay servicios configurados</p>}
+                                            )) : <p style={{ fontSize: '0.8rem', color: 'var(--text-light)', fontStyle: 'italic' }}>{t('profile.noServices')}</p>}
                                         </div>
                                     </div>
                                 </>
@@ -280,7 +287,7 @@ export default function ProfilePage() {
                     {activeTab === 'edit' && (
                         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <div>
-                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>Tipo de Usuario</label>
+                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>{t('auth.signup.userType')}</label>
                                 <select
                                     value={formData.userType}
                                     onChange={(e) => setFormData({ ...formData, userType: e.target.value as any })}
@@ -293,14 +300,14 @@ export default function ProfilePage() {
                                         background: 'white'
                                     }}
                                 >
-                                    <option value="owner">Dueño de Mascota</option>
-                                    <option value="sitter">Cuidador</option>
-                                    <option value="both">Ambos (Dueño y Cuidador)</option>
+                                    <option value="owner">{t('auth.signup.types.owner')}</option>
+                                    <option value="sitter">{t('auth.signup.types.sitter')}</option>
+                                    <option value="both">{t('auth.signup.types.both')}</option>
                                 </select>
                             </div>
 
                             <div>
-                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>Nombre Completo</label>
+                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>{t('auth.signup.name')}</label>
                                 <input
                                     type="text"
                                     value={formData.name}
@@ -318,7 +325,7 @@ export default function ProfilePage() {
                             </div>
 
                             <div>
-                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>País</label>
+                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>{t('auth.signup.country')}</label>
                                 <select
                                     value={formData.country}
                                     onChange={(e) => {
@@ -337,7 +344,7 @@ export default function ProfilePage() {
                                         outline: 'none',
                                     }}
                                 >
-                                    <option value="" disabled>Selecciona tu país</option>
+                                    <option value="" disabled>{t('auth.signup.countryPlaceholder')}</option>
                                     {AMERICAN_COUNTRIES.map((country) => (
                                         <option key={country} value={country}>
                                             {country}
@@ -348,7 +355,7 @@ export default function ProfilePage() {
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                                 <div>
-                                    <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>Provincia</label>
+                                    <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>{t('auth.signup.province')}</label>
                                     <input
                                         type="text"
                                         placeholder="Ej: San José"
@@ -366,7 +373,7 @@ export default function ProfilePage() {
                                     />
                                 </div>
                                 <div>
-                                    <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>Cantón</label>
+                                    <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>{t('auth.signup.canton')}</label>
                                     <input
                                         type="text"
                                         placeholder="Ej: Escazú"
@@ -385,20 +392,20 @@ export default function ProfilePage() {
                                 </div>
                             </div>
 
-                            <Button type="submit" fullWidth isLoading={saving} disabled={saving}>Guardar Cambios</Button>
+                            <Button type="submit" fullWidth isLoading={saving} disabled={saving}>{t('profile.saveChanges') || 'Guardar Cambios'}</Button>
                         </form>
                     )}
 
                     {activeTab === 'sitter' && (
                         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                             <section>
-                                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)' }}>Sobre Ti</h3>
+                                <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)' }}>{t('sitter.about')} {formData.name.split(' ')[0]}</h3>
                                 <div style={{ marginBottom: '1.5rem' }}>
-                                    <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>Biografía del Cuidador</label>
+                                    <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>{t('sitter.bio') || 'Biografía'}</label>
                                     <textarea
                                         value={formData.bio}
                                         onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                                        placeholder="Cuéntanos sobre ti y tu experiencia cuidando mascotas..."
+                                        placeholder="..."
                                         rows={5}
                                         style={{
                                             width: '100%',
@@ -414,7 +421,7 @@ export default function ProfilePage() {
 
                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
                                     <div>
-                                        <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>Edad</label>
+                                        <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>{t('sitter.age')}</label>
                                         <input
                                             type="number"
                                             value={formData.age}
@@ -429,7 +436,7 @@ export default function ProfilePage() {
                                         />
                                     </div>
                                     <div>
-                                        <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>Experiencia (años)</label>
+                                        <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>{t('sitter.experience')}</label>
                                         <input
                                             type="number"
                                             value={formData.experienceYears}
@@ -444,7 +451,7 @@ export default function ProfilePage() {
                                         />
                                     </div>
                                     <div>
-                                        <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>Mascotas propias</label>
+                                        <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>{t('sitter.ownPets')}</label>
                                         <input
                                             type="text"
                                             placeholder="Ej: 1 Perro, 2 Gatos"
@@ -462,10 +469,10 @@ export default function ProfilePage() {
                                 </div>
 
                                 <div>
-                                    <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>Habilidades (separadas por coma)</label>
+                                    <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.875rem' }}>{t('sitter.skills')}</label>
                                     <input
                                         type="text"
-                                        placeholder="Ej: Primeros Auxilios, Entrenamiento, Medicación Oral"
+                                        placeholder="Ej: Primeros Auxilios, Entrenamiento"
                                         value={formData.skills}
                                         onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
                                         style={{
@@ -481,15 +488,15 @@ export default function ProfilePage() {
 
                             <section>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-main)' }}>Servicios y Precios</h3>
-                                    <Button type="button" onClick={addService} variant="outline" size="sm">+ Agregar Servicio</Button>
+                                    <h3 style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-main)' }}>{t('sitter.servicesPricing')}</h3>
+                                    <Button type="button" onClick={addService} variant="outline" size="sm">+ {t('profile.addService') || 'Agregar Servicio'}</Button>
                                 </div>
 
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                     {formData.services.map((service, index) => (
                                         <div key={index} style={{ padding: '1rem', background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: 'var(--radius-md)', display: 'grid', gridTemplateColumns: '1fr 1fr auto', gap: '1rem', alignItems: 'end' }}>
                                             <div>
-                                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Tipo de Servicio</label>
+                                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{t('sitter.serviceType') || 'Tipo de Servicio'}</label>
                                                 <select
                                                     value={service.type}
                                                     onChange={(e) => updateService(index, 'type', e.target.value)}
@@ -501,17 +508,17 @@ export default function ProfilePage() {
                                                         fontSize: '0.85rem'
                                                     }}
                                                 >
-                                                    <option value="boarding">Hospedaje</option>
-                                                    <option value="walking">Paseo</option>
-                                                    <option value="daycare">Guardería</option>
-                                                    <option value="visits">Visitas a Domicilio</option>
-                                                    <option value="taxi">Pet Taxi</option>
-                                                    <option value="grooming">Peluquería</option>
-                                                    <option value="training">Entrenamiento</option>
+                                                    <option value="boarding">{t('sitter.boarding')}</option>
+                                                    <option value="walking">{t('sitter.walking')}</option>
+                                                    <option value="daycare">{t('sitter.daycare')}</option>
+                                                    <option value="visits">{t('sitter.visits')}</option>
+                                                    <option value="taxi">{t('sitter.taxi')}</option>
+                                                    <option value="grooming">{t('sitter.grooming')}</option>
+                                                    <option value="training">{t('sitter.training')}</option>
                                                 </select>
                                             </div>
                                             <div>
-                                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Precio (₡)</label>
+                                                <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.5rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{t('sitter.price') || 'Precio (₡)'}</label>
                                                 <input
                                                     type="number"
                                                     value={service.price}
@@ -525,23 +532,23 @@ export default function ProfilePage() {
                                                     }}
                                                 />
                                             </div>
-                                            <Button type="button" onClick={() => removeService(index)} variant="outline" size="sm" style={{ color: '#EF4444', borderColor: '#FEE2E2' }}>Eliminar</Button>
+                                            <Button type="button" onClick={() => removeService(index)} variant="outline" size="sm" style={{ color: '#EF4444', borderColor: '#FEE2E2' }}>{t('common.delete') || 'Eliminar'}</Button>
                                         </div>
                                     ))}
                                     {formData.services.length === 0 && (
                                         <p style={{ textAlign: 'center', color: 'var(--text-light)', fontSize: '0.9rem', padding: '2rem', border: '2px dashed #E5E7EB', borderRadius: 'var(--radius-lg)' }}>
-                                            No has agregado ningún servicio. Haz clic en "Agregar Servicio" para comenzar.
+                                            {t('profile.noServicesDesc') || 'No has agregado ningún servicio.'}
                                         </p>
                                     )}
                                 </div>
                             </section>
 
-                            <Button type="submit" fullWidth isLoading={saving} disabled={saving} size="lg">Guardar Información de Cuidador</Button>
+                            <Button type="submit" fullWidth isLoading={saving} disabled={saving} size="lg">{t('profile.saveSitterInfo') || 'Guardar Información de Cuidador'}</Button>
                         </form>
                     )}
 
                     <div style={{ marginTop: '2rem', paddingTop: '1.5rem', borderTop: '1px solid #F3F4F6', textAlign: 'center' }}>
-                        <Link href="/" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Volver al Inicio</Link>
+                        <Link href="/" style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{t('navbar.home')}</Link>
                     </div>
                 </Card>
             </div>

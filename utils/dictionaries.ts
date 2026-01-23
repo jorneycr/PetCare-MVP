@@ -87,7 +87,12 @@ export const dictionary = {
             sitter: 'Cuidador',
             both: 'Ambos',
             viewProfile: 'Ver Perfil',
-            from: 'Desde'
+            from: 'Desde',
+            years: 'años',
+            none: 'Ninguna',
+            delete: 'Eliminar',
+            yes: 'Sí',
+            no: 'No'
         },
         sitter: {
             profile: 'Perfil',
@@ -207,9 +212,37 @@ export const dictionary = {
             error: 'Error al actualizar el perfil'
         },
         becomeSitter: {
-            title: 'Conviértete en Cuidador',
-            subtitle: 'Gana dinero haciendo lo que amas',
-            cta: 'Empezar ahora'
+            title: 'Conviértete en Cuidador de Mascotas',
+            subtitle: 'Gana dinero haciendo lo que amas. Únete a nuestra comunidad de cuidadores verificados y empieza a ganar dinero cuidando mascotas en tu tiempo libre.',
+            cta: 'Registrarse Gratis',
+            benefits: {
+                title: '¿Por qué ser cuidador en PetCare?',
+                earn: { title: 'Gana Dinero Extra', desc: 'Establece tus propias tarifas y horarios. Los cuidadores ganan en promedio ₡150,000 - ₡400,000 al mes.' },
+                home: { title: 'Trabaja desde Casa', desc: 'No necesitas desplazarte. Cuida mascotas en tu propio hogar o visita a los clientes cerca de ti.' },
+                protection: { title: 'Protección Premium', desc: 'Cobertura veterinaria incluida en todas las reservas. Soporte 24/7 para cualquier emergencia.' },
+                flexibility: { title: 'Flexibilidad Total', desc: 'Tú decides cuándo y cuántas mascotas aceptar. Perfecto para estudiantes y freelancers.' },
+                love: { title: 'Haz lo que Amas', desc: 'Si te encantan los animales, esta es la oportunidad perfecta para pasar tiempo con ellos.' },
+                reputation: { title: 'Construye tu Reputación', desc: 'Las reseñas positivas te ayudarán a conseguir más clientes y aumentar tus ingresos.' }
+            },
+            steps: {
+                title: 'Cómo Empezar',
+                step1: { title: 'Regístrate Gratis', desc: 'Crea tu perfil en menos de 5 minutos. Es completamente gratis y sin compromiso.' },
+                step2: { title: 'Completa tu Perfil', desc: 'Agrega fotos, describe tu experiencia y establece tus tarifas. Cuanto más completo, mejor.' },
+                step3: { title: 'Verificación', desc: 'Verificamos tu identidad y experiencia para garantizar la seguridad de todos.' },
+                step4: { title: 'Recibe Solicitudes', desc: 'Los dueños de mascotas te contactarán. Tú decides qué reservas aceptar.' },
+                step5: { title: 'Cuida y Gana', desc: 'Brinda un servicio excelente, recibe reseñas positivas y cobra directamente.' }
+            },
+            ctaCard: {
+                title: '¿Listo para empezar?',
+                subtitle: 'Únete a cientos de cuidadores que ya están ganando dinero haciendo lo que aman',
+                button: 'Crear Cuenta de Cuidador'
+            }
+        },
+        chatbot: {
+            title: 'Asistente PetCare',
+            welcome: '¡Hola! Soy tu asistente de PetCare. ¿En qué puedo ayudarte hoy?',
+            placeholder: 'Escribe un mensaje...',
+            typing: 'Escribiendo...'
         }
     },
     en: {
@@ -300,7 +333,12 @@ export const dictionary = {
             sitter: 'Sitter',
             both: 'Both',
             viewProfile: 'View Profile',
-            from: 'From'
+            from: 'From',
+            years: 'years',
+            none: 'None',
+            delete: 'Delete',
+            yes: 'Yes',
+            no: 'No'
         },
         sitter: {
             profile: 'Profile',
@@ -420,9 +458,37 @@ export const dictionary = {
             error: 'Error updating profile'
         },
         becomeSitter: {
-            title: 'Become a Sitter',
-            subtitle: 'Earn money doing what you love',
-            cta: 'Get started'
+            title: 'Become a Pet Sitter',
+            subtitle: 'Earn money doing what you love. Join our community of verified sitters and start earning by caring for pets in your free time.',
+            cta: 'Sign Up for Free',
+            benefits: {
+                title: 'Why be a sitter on PetCare?',
+                earn: { title: 'Earn Extra Money', desc: 'Set your own rates and schedules. Sitters earn on average ₡150,000 - ₡400,000 per month.' },
+                home: { title: 'Work from Home', desc: 'No need to commute. Care for pets in your own home or visit clients near you.' },
+                protection: { title: 'Premium Protection', desc: 'Veterinary coverage included in all bookings. 24/7 support for any emergency.' },
+                flexibility: { title: 'Total Flexibility', desc: 'You decide when and how many pets to accept. Perfect for students and freelancers.' },
+                love: { title: 'Do What You Love', desc: 'If you love animals, this is the perfect opportunity to spend time with them.' },
+                reputation: { title: 'Build Your Reputation', desc: 'Positive reviews will help you get more clients and increase your income.' }
+            },
+            steps: {
+                title: 'How to Get Started',
+                step1: { title: 'Sign Up for Free', desc: 'Create your profile in less than 5 minutes. It\'s completely free and without commitment.' },
+                step2: { title: 'Complete Your Profile', desc: 'Add photos, describe your experience and set your rates. The more complete, the better.' },
+                step3: { title: 'Verification', desc: 'We verify your identity and experience to ensure everyone\'s safety.' },
+                step4: { title: 'Receive Requests', desc: 'Pet owners will contact you. You decide which bookings to accept.' },
+                step5: { title: 'Care and Earn', desc: 'Provide excellent service, receive positive reviews and get paid directly.' }
+            },
+            ctaCard: {
+                title: 'Ready to start?',
+                subtitle: 'Join hundreds of sitters who are already earning money doing what they love',
+                button: 'Create Sitter Account'
+            }
+        },
+        chatbot: {
+            title: 'PetCare Assistant',
+            welcome: 'Hi! I\'m your PetCare assistant. How can I help you today?',
+            placeholder: 'Write a message...',
+            typing: 'Typing...'
         }
     },
     pt: {
@@ -513,7 +579,12 @@ export const dictionary = {
             sitter: 'Cuidador',
             both: 'Ambos',
             viewProfile: 'Ver Perfil',
-            from: 'A partir de'
+            from: 'A partir de',
+            years: 'anos',
+            none: 'Nenhum',
+            delete: 'Eliminar',
+            yes: 'Sim',
+            no: 'Não'
         },
         sitter: {
             profile: 'Perfil',
@@ -633,9 +704,37 @@ export const dictionary = {
             error: 'Erro ao atualizar o perfil'
         },
         becomeSitter: {
-            title: 'Torne-se um Cuidador',
-            subtitle: 'Ganhe dinheiro fazendo o que ama',
-            cta: 'Começar agora'
+            title: 'Torne-se um Cuidador de Pets',
+            subtitle: 'Ganhe dinheiro fazendo o que ama. Junte-se à nossa comunidade de cuidadores verificados e comece a ganhar cuidando de animais no seu tempo livre.',
+            cta: 'Cadastre-se Grátis',
+            benefits: {
+                title: 'Por que ser cuidador no PetCare?',
+                earn: { title: 'Ganhe Dinheiro Extra', desc: 'Defina suas próprias tarifas e horários. Cuidadores ganham em média ₡150.000 - ₡400.000 por mês.' },
+                home: { title: 'Trabalhe de Casa', desc: 'Não precisa se deslocar. Cuide de animais no seu próprio lar ou visite clientes perto de você.' },
+                protection: { title: 'Proteção Premium', desc: 'Cobertura veterinária incluída em todas as reservas. Suporte 24/7 para qualquer emergência.' },
+                flexibility: { title: 'Flexibilidade Total', desc: 'Você decide quando e quantos animais aceitar. Perfeito para estudantes e freelancers.' },
+                love: { title: 'Faça o que Você Ama', desc: 'Se você ama animais, esta é a oportunidade perfeita para passar tempo com eles.' },
+                reputation: { title: 'Construa sua Reputação', desc: 'Avaliações positivas ajudarão você a conseguir mais clientes e aumentar sua renda.' }
+            },
+            steps: {
+                title: 'Como Começar',
+                step1: { title: 'Cadastre-se Grátis', desc: 'Crie seu perfil em menos de 5 minutos. É completamente gratuito e sem compromisso.' },
+                step2: { title: 'Complete seu Perfil', desc: 'Adicione fotos, descreva sua experiência e defina suas tarifas. Quanto mais completo, melhor.' },
+                step3: { title: 'Verificação', desc: 'Verificamos sua identidade e experiência para garantir a segurança de todos.' },
+                step4: { title: 'Receba Solicitações', desc: 'Donos de pets entrarão em contato. Você decide quais reservas aceitar.' },
+                step5: { title: 'Cuide e Ganhe', desc: 'Ofereça um serviço excelente, receba avaliações positivas e receba diretamente.' }
+            },
+            ctaCard: {
+                title: 'Pronto para começar?',
+                subtitle: 'Junte-se a centenas de cuidadores que já estão ganhando dinheiro fazendo o que amam',
+                button: 'Criar Conta de Cuidador'
+            }
+        },
+        chatbot: {
+            title: 'Assistente PetCare',
+            welcome: 'Olá! Sou o seu assistente PetCare. Como posso ajudar hoje?',
+            placeholder: 'Escreva uma mensagem...',
+            typing: 'Digitando...'
         }
     },
     fr: {
@@ -726,7 +825,12 @@ export const dictionary = {
             sitter: 'Gardien',
             both: 'Les deux',
             viewProfile: 'Voir Profil',
-            from: 'À partir de'
+            from: 'À partir de',
+            years: 'ans',
+            none: 'Aucun',
+            delete: 'Supprimer',
+            yes: 'Oui',
+            no: 'Non'
         },
         sitter: {
             profile: 'Profil',
@@ -756,7 +860,7 @@ export const dictionary = {
             boarding: '🏠 Hébergement',
             walking: '🦮 Promenade',
             daycare: '☀️ Garderie',
-            visits: '🐱 Visitas',
+            visits: '🐱 Visites',
             taxi: '🚗 Pet Taxi',
             grooming: '✂️ Toilettage',
             training: '🎓 Dressage',
@@ -846,9 +950,37 @@ export const dictionary = {
             error: 'Erreur lors de la mise à jour du profil'
         },
         becomeSitter: {
-            title: 'Devenez Gardien',
-            subtitle: 'Gagnez de l\'argent en faisant ce que vous aimez',
-            cta: 'Commencer maintenant'
+            title: 'Devenez Gardien d\'Animaux',
+            subtitle: 'Gagnez de l\'argent en faisant ce que vous aimez. Rejoignez notre communauté de gardiens vérifiés et commencez à gagner en prenant soin d\'animaux pendant votre temps libre.',
+            cta: 'S\'inscrire Gratuitement',
+            benefits: {
+                title: 'Pourquoi devenir gardien sur PetCare ?',
+                earn: { title: 'Gagnez de l\'Argent Extra', desc: 'Fixez vos propres tarifs et horaires. Les gardiens gagnent en moyenne 150 000 ₡ - 400 000 ₡ par mois.' },
+                home: { title: 'Travaillez de Chez Vous', desc: 'Pas besoin de vous déplacer. Gardez des animaux chez vous ou visitez des clients près de chez vous.' },
+                protection: { title: 'Protection Premium', desc: 'Couverture vétérinaire incluse dans toutes les réservations. Support 24/7 pour toute urgence.' },
+                flexibility: { title: 'Flexibilité Totale', desc: 'Vous décidez quand et combien d\'animaux accepter. Parfait pour les étudiants et les freelances.' },
+                love: { title: 'Faites ce que vous Aimez', desc: 'Si vous aimez les animaux, c\'est l\'occasion rêvée de passer du temps avec eux.' },
+                reputation: { title: 'Bâtissez votre Réputation', desc: 'Les avis positifs vous aideront à obtenir plus de clients et à augmenter vos revenus.' }
+            },
+            steps: {
+                title: 'Comment Débuter',
+                step1: { title: 'Inscrivez-vous Gratuitement', desc: 'Créez votre profil en moins de 5 minutes. C\'est gratuit et sans engagement.' },
+                step2: { title: 'Complétez votre Profil', desc: 'Ajoutez des photos, décrivez votre expérience et fixez vos tarifs. Plus c\'est complet, mieux c\'est.' },
+                step3: { title: 'Vérification', desc: 'Nous vérifions votre identité et votre expérience pour garantir la sécurité de tous.' },
+                step4: { title: 'Recevez des Demandes', desc: 'Les propriétaires vous contacteront. Vous décidez quelles réservations accepter.' },
+                step5: { title: 'Gardez et Gagnez', desc: 'Offrez un excellent service, recevez des avis positifs et soyez payé directement.' }
+            },
+            ctaCard: {
+                title: 'Prêt à commencer ?',
+                subtitle: 'Rejoignez des centaines de gardiens qui gagnent déjà de l\'argent en faisant ce qu\'ils aiment',
+                button: 'Créer un Compte Gardien'
+            }
+        },
+        chatbot: {
+            title: 'Assistant PetCare',
+            welcome: 'Bonjour! Je suis votre assistant PetCare. Comment puis-je vous aider aujourd\'hui ?',
+            placeholder: 'Écrivez un message...',
+            typing: 'En train d\'écrire...'
         }
     }
 };

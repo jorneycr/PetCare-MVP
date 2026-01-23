@@ -347,7 +347,7 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                     <div style={{ fontSize: '1.25rem' }}>🚑</div>
                                     <div>
                                         <div style={{ fontSize: '0.75rem', color: 'var(--text-light)', fontWeight: 600 }}>{t('sitter.emergencyTransport')}</div>
-                                        <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{sitter.emergencyTransport ? 'Sí' : 'No'}</div>
+                                        <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{sitter.emergencyTransport ? t('common.yes') : t('common.no')}</div>
                                     </div>
                                 </div>
                             </div>
@@ -455,7 +455,7 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                                         {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
                                                     </div>
                                                     {review.verified && (
-                                                        <div style={{ fontSize: '0.65rem', color: 'var(--primary)', fontWeight: 600 }}>PetCare Verified</div>
+                                                        <div style={{ fontSize: '0.65rem', color: 'var(--primary)', fontWeight: 600 }}>{t('sitter.verified')}</div>
                                                     )}
                                                 </div>
                                             </div>
@@ -549,68 +549,35 @@ export default async function SitterProfilePage({ params }: SitterProfilePagePro
                                 {t('sitter.guarantee')}
                             </p>
 
-                            {/* Payment Methods */}
-                            <div style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                gap: '0.75rem',
-                                padding: '1rem 0',
-                                borderTop: '1px solid #F3F4F6',
-                                flexWrap: 'wrap'
-                            }}>
-                                <span title="Visa" style={{ fontSize: '1.5rem', opacity: 0.7 }}>💳</span>
-                                <span title="Mastercard" style={{ fontSize: '1.5rem', opacity: 0.7 }}>🎴</span>
-                                <span title="PayPal" style={{ fontSize: '1.5rem', opacity: 0.7 }}>🅿️</span>
-                                <span title="SINPE Móvil" style={{
-                                    fontSize: '0.75rem',
-                                    fontWeight: 800,
-                                    color: '#0066CC',
-                                    border: '1.5px solid #0066CC',
-                                    padding: '0.2rem 0.4rem',
-                                    borderRadius: '4px',
-                                    display: 'flex',
-                                    alignItems: 'center'
-                                }}>SINPE</span>
-                                <span title="Transferencia" style={{ fontSize: '0.75rem', fontWeight: 700, opacity: 0.5, display: 'flex', alignItems: 'center' }}>TRANSF.</span>
-                            </div>
-
-                            <div style={{ marginTop: '1rem', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', borderTop: '1px solid #F3F4F6', paddingTop: '1.5rem' }}>
-                                {[
-                                    { label: t('sitter.completedBookings'), val: sitter.completedBookings, color: '#9333EA', icon: '14' },
-                                    { label: t('sitter.repeatCustomers'), val: sitter.repeatCustomers, color: '#0891B2', icon: '4' },
-                                    { label: 'Fieles', val: 6, color: '#0891B2', icon: '6' },
-                                    { label: 'Mobile', val: '', color: '#EA580C', icon: '📱' },
-                                    { label: 'FB', val: '', color: '#1E40AF', icon: 'f' },
-                                    { label: 'Email', val: '', color: '#65A30D', icon: '✉️' },
-                                    { label: 'Google', val: '', color: '#DC2626', icon: 'G+' },
-                                    { label: 'Id', val: '', color: '#0EA5E9', icon: '🆔' },
-                                    { label: 'Business', val: '', color: '#0891B2', icon: '💼' },
-                                    { label: 'Test', val: '', color: '#F59E0B', icon: '🎓' },
-                                    { label: 'Intro', val: '', color: '#F59E0B', icon: '📄' },
-                                    { label: 'Police', val: '', color: '#1E3A8A', icon: '🛡️' },
-                                ].map((badge, idx) => (
-                                    <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-                                        <div style={{
-                                            width: '40px',
-                                            height: '40px',
-                                            borderRadius: '50%',
-                                            border: `2px dashed ${badge.color}`,
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            color: badge.color,
-                                            background: 'white',
-                                            fontSize: badge.icon.length > 2 ? '0.9rem' : '1.125rem',
-                                            fontWeight: 800,
-                                            boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
-                                        }}>
-                                            {badge.icon}
+                            {/* Verification Section */}
+                            <div style={{ borderTop: '1px solid #F3F4F6', paddingTop: '1.5rem' }}>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
+                                    {[
+                                        { icon: '🆔', label: 'ID' },
+                                        { icon: '📱', label: 'Phone' },
+                                        { icon: '✉️', label: 'Email' },
+                                        { icon: '🛡️', label: 'Police' },
+                                    ].map((badge, idx) => (
+                                        <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+                                            <div style={{
+                                                width: '40px',
+                                                height: '40px',
+                                                borderRadius: '50%',
+                                                border: '2px solid #E5E7EB',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                fontSize: '1.25rem',
+                                                background: 'white',
+                                            }}>
+                                                {badge.icon}
+                                            </div>
+                                            <span style={{ fontSize: '0.625rem', color: 'var(--text-light)', fontWeight: 600, textTransform: 'uppercase' }}>
+                                                {badge.label}
+                                            </span>
                                         </div>
-                                        <span style={{ fontSize: '0.625rem', color: 'var(--text-light)', fontWeight: 600, textTransform: 'uppercase', textAlign: 'center' }}>
-                                            {badge.label}
-                                        </span>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
                         </Card>
                     </div>
